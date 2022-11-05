@@ -3,46 +3,12 @@ namespace Keeper.Repositories;
 
 public class KeepsRepository : BaseRepository
 {
-  internal List<Keep> GetKeepsByVaultId(int vaultId)
-  {
-    var sql = @"
-    SELECT
-    k.*,
-    a.*
-    FROM keeps k
-    JOIN accounts a ON a.id = k.creatorId
-    WHERE k.keepId = @keepId
-    ;";
-
-    return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
-    {
-      keep.Creator = profile;
-      return keep;
-    }, new { vaultId }).ToList();
-  }
-
-
   internal List<Keep> GetKeeps()
   {
-    // var sql = @"
-    // SELECT
-    // c.*,
-    //   COUNT(cm.id) AS MemberCount,
-    // a.*
-    // FROM cults c
-    //   JOIN accounts a ON a.id = c.leaderId
-    //   LEFT JOIN cult_members cm ON cm.cultId = c.id
-    // GROUP BY c.id
-    // ;";
-
-    // return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
-    // {
-    //   keep.Creator = profile;
-    //   return keep;
-    // }).ToList();
+    // FIXME: cannot have creator populated
 
     var sql = @"
-      SELECT * FROM keepsDTO
+      SELECT * FROM keepDTO
     ;";
     return _db.Query<Keep>(sql).ToList();
   }

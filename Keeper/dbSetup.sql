@@ -32,7 +32,7 @@ CREATE TABLE
         -- 
         creatorId VARCHAR(255) NOT NULL,
         -- 
-        FOREIGN KEY (creatorId) REFERENCES accounts(id)
+        FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
 --
