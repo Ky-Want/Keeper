@@ -53,12 +53,12 @@ CREATE TABLE
         description VARCHAR(255) NOT NULL,
         -- 
         views int NOT NULL,
+        kept int NOT NULL,
         --
-        kept TINYINT DEFAULT 0 NOT NULL,
         creatorId VARCHAR(255) NOT NULL,
         -- 
         FOREIGN KEY (creatorId) REFERENCES accounts(id),
-        FOREIGN KEY (kept) REFERENCES vaultId(id)
+        FOREIGN KEY (kept) REFERENCES vaults(id)
     ) default charset utf8 COMMENT '';
 
 --
