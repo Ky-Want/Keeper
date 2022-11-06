@@ -40,14 +40,10 @@
 
 
 
-
-
             <!-- how many people have view and saved this keep -->
             <div class="row d-flex justify-content-center mb-3">
               views + kept
             </div>
-
-
 
 
 
@@ -60,8 +56,6 @@
                 praesentium accusamus mollitia illum labore blanditiis perspiciatis consequuntur, vitae, veritatis
                 maxime, in harum fugit excepturi magni exercitationem quibusdam?</p>
             </div>
-
-
 
 
 
