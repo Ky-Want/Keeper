@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark px-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
+      <div class="d-flex flex-column align-items-center border border-light px-2 p-1 selectable rounded">
+        <strong>HOME</strong>
       </div>
     </router-link>
 
@@ -16,9 +16,24 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-            About
-          </router-link>
+          <!-- <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase"> -->
+          <div class="dropdown text-primary selectable">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              CREATE
+            </a>
+
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item text-green" href="#">
+                  <strong>new keep</strong>
+                </a></li>
+
+              <li><a class="dropdown-item text-danger" href="#">
+                  <strong>new vault</strong>
+                </a></li>
+            </ul>
+          </div>
+          <!-- </router-link> -->
         </li>
       </ul>
 
@@ -52,6 +67,10 @@ export default {
 
 
 <style scoped>
+.text-green {
+  color: green;
+}
+
 a:hover {
   text-decoration: none;
 }
