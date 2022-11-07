@@ -10,24 +10,23 @@ public class VaultsRepository : BaseRepository
 
 
 
-  // get by id
-  // internal List<Keep> GetKeepsByVaultId(int vaultId)
-  // {
-  //   var sql = @"
-  //   SELECT
-  //   k.*,
-  //   a.*
-  //   FROM keeps k
-  //   JOIN accounts a ON a.id = k.creatorId
-  //   WHERE k.keepId = @keepId
-  //   ;";
+  internal Vault GetVaultById(int vaultId)
+  {
+    var sql = @"
+    SELECT
+    v.*,
+    a.*
+    FROM vaults v
+    JOIN accounts a ON a.id = v.creatorId
+    WHERE v.id = @vaultId
+    ;";
 
-  //   return _db.Query<Keep, Profile, Keep>(sql, (keep, profile) =>
-  //   {
-  //     keep.CreatorId = profile;
-  //     return keep;
-  //   }, new { vaultId }).ToList();
-  // }
+    return _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
+    {
+      vault.Creator = profile;
+      return vault;
+    }, new { vaultId }).FirstOrDefault();
+  }
 
 
 
@@ -46,7 +45,7 @@ public class VaultsRepository : BaseRepository
       img)
     VALUES(
       @Name, 
-      @CreatorId
+      @CreatorId,
       @Description, 
       @IsPrivate, 
       @Img);

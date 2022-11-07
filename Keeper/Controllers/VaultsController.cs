@@ -17,7 +17,20 @@ public class VaultsController : ControllerBase
 
 
 
-  // get by id
+  [Authorize]
+  [HttpGet]
+  public ActionResult<Vault> GetVaultById(int vaultId)
+  {
+    try
+    {
+      Vault foundVault = _vs.GetVaultById(vaultId);
+      return Ok(foundVault);
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
 
 
 

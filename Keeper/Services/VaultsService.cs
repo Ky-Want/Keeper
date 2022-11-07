@@ -14,7 +14,15 @@ public class VaultsService
 
 
 
-  // get by id
+  internal Vault GetVaultById(int vaultId)
+  {
+    Vault foundVault = _vr.GetVaultById(vaultId);
+    if (foundVault == null)
+    {
+      throw new Exception("Vault does not exist.");
+    }
+    return foundVault;
+  }
 
 
 
@@ -26,6 +34,7 @@ public class VaultsService
   {
     return _vr.CreateVault(newVault);
   }
+
 
 
   // delete
