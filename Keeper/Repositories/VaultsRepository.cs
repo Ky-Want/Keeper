@@ -39,12 +39,14 @@ public class VaultsRepository : BaseRepository
   {
     var sql = @"
     INSERT INTO vaults(
-      name, 
+      name,
+      creatorId, 
       description, 
       isPrivate, 
       img)
     VALUES(
       @Name, 
+      @CreatorId
       @Description, 
       @IsPrivate, 
       @Img);
