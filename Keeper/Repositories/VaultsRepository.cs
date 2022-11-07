@@ -10,6 +10,7 @@ public class VaultsRepository : BaseRepository
 
 
 
+  // get by id
   // internal List<Keep> GetKeepsByVaultId(int vaultId)
   // {
   //   var sql = @"
@@ -37,8 +38,16 @@ public class VaultsRepository : BaseRepository
   internal Vault CreateVault(Vault newVault)
   {
     var sql = @"
-    INSERT INTO vaults(name, description, isPrivate, img)
-    VALUES(@Name, @Description, @IsPrivate, @Img);
+    INSERT INTO vaults(
+      name, 
+      description, 
+      isPrivate, 
+      img)
+    VALUES(
+      @Name, 
+      @Description, 
+      @IsPrivate, 
+      @Img);
     SELECT LAST_INSERT_ID()
     ;";
 

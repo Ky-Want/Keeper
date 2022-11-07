@@ -20,7 +20,7 @@
 
     <!-- number of owned keeps and vaults -->
     <div class="d-flex gap-4 justify-content-center mb-5 pb-3">
-      <p>5 vaults</p> | <p>21 keeps</p>
+      <p>5 vaults</p> | <p>10 keeps</p>
     </div>
 
 

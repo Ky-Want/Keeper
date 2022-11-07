@@ -4,12 +4,10 @@ namespace Keeper.Services;
 public class VaultsService
 {
   private readonly VaultsRepository _vr;
-  private readonly VaultKeepsRepository _vkRepo;
 
-  public VaultsService(VaultsRepository vr, VaultKeepsRepository vkRepo)
+  public VaultsService(VaultsRepository vr)
   {
     _vr = vr;
-    _vkRepo = vkRepo;
   }
 
 

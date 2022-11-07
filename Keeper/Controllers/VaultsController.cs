@@ -7,12 +7,10 @@ public class VaultsController : ControllerBase
 {
   private readonly Auth0Provider _a0;
   private readonly VaultsService _vs;
-  private readonly KeepsService _ks;
 
-  public VaultsController(Auth0Provider a0, VaultsService vs, KeepsService ks)
+  public VaultsController(Auth0Provider a0, VaultsService vs)
   {
     _a0 = a0;
-    _ks = ks;
     _vs = vs;
   }
 
@@ -35,6 +33,7 @@ public class VaultsController : ControllerBase
     {
       Account userInfo = await _a0.GetUserInfoAsync<Account>(HttpContext);
       newVault.CreatorId = userInfo.Id;
+
       Vault createdVault = _vs.CreateVault(newVault);
       createdVault.Creator = userInfo;
       return Ok(createdVault);

@@ -41,6 +41,9 @@ public class Startup
     // Added transients
     services.AddTransient<KeepsRepository>();
     services.AddTransient<KeepsService>();
+
+    services.AddTransient<VaultsRepository>();
+    services.AddTransient<VaultsService>();
   }
 
 
