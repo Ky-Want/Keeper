@@ -5,9 +5,6 @@
   <main>
     <router-view />
   </main>
-  <footer class="bg-dark text-light">
-    Made with 💖 by Ky Want
-  </footer>
 </template>
 
 <script>

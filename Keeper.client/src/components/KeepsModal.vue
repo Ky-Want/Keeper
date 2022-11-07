@@ -18,7 +18,7 @@
             <div class="d-flex justify-content-between">
               <!-- picture and onHover name of the creator of this keep -->
               <img src="//thiscatdoesnotexist.com" alt="Keep Creator Pic" title="Keep creator name"
-                class="creator-pic rounded-circle">
+                class="creator-pic rounded-circle selectable">
 
               <!-- close modal -->
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -28,13 +28,11 @@
 
             <!-- how many people have view and saved this keep -->
             <!-- FIXME: can't get the i tags to flex next to each other -->
-            <div class="row d-flex justify-content-center mb-3 mt-2">
-              <div>
-                <i class="fa-solid fa-eye"></i> 10
+            <div class="row d-flex justify-content-center mb-3 mt-4">
+              <div>10 <i class="fa-solid fa-eye"></i>
               </div>
 
-              <div>
-                <i class="fa-solid fa-k"></i> 5
+              <div>5 <i class="fa-solid fa-k"></i>
               </div>
             </div>
 
