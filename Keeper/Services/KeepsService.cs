@@ -42,4 +42,38 @@ public class KeepsService
   {
     return _keepsRepo.CreateKeep(newKeep);
   }
+
+
+  public void DeleteKeep(int id, string userId)
+  {
+    var keep = GetKeepById(id);
+    if (keep.CreatorId != userId)
+    {
+      throw new Exception("You are not authorized to delete this Keep.");
+    }
+
+    _keepsRepo.DeleteKeep(id);
+  }
+
+
+
+
+
+
+
+  public Keep EditKeep(Keep keep, Account userId)
+  {
+    var original = GetKeepById(keep.Id);
+    if (original.CreatorId != userId.Id)
+    {
+      throw new Exception("You are not authorized to change this Keep.");
+    }
+
+    original.Name = keep.Name;
+    original.Description = keep.Description;
+    original.Kept = keep.Kept;
+
+    var updated = _keepsRepo.EditKeep(original);
+    return updated;
+  }
 }

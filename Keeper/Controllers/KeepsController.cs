@@ -53,8 +53,8 @@ public class KeepsController : ControllerBase
 
 
 
-  [HttpPost]
   [Authorize]
+  [HttpPost]
   public async Task<ActionResult<Keep>> CreateKeep([FromBody] Keep newKeep)
   {
     try
@@ -64,6 +64,47 @@ public class KeepsController : ControllerBase
       Keep createdKeep = _ks.CreateKeep(newKeep);
       createdKeep.Creator = userInfo;
       return Ok(createdKeep);
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
+
+
+  [Authorize]
+  [HttpDelete("{id}")]
+  public async Task<ActionResult<Keep>> DeleteKeep(int id)
+  {
+    try
+    {
+      var userInfo = await _a0.GetUserInfoAsync<Account>(HttpContext);
+      _ks.DeleteKeep(id, userInfo?.Id);
+      return Ok("Keep Deleted");
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
+
+
+
+
+
+
+
+  [Authorize]
+  [HttpPut("{id}")]
+  public async Task<ActionResult<Keep>> EditKeep([FromBody] Keep data, int id)
+  {
+    try
+    {
+      Account userInfo = await _a0.GetUserInfoAsync<Account>(HttpContext);
+      data.Id = id;
+
+      Keep keep = _ks.EditKeep(data, userInfo);
+      return Ok(keep);
     }
     catch (Exception e)
     {

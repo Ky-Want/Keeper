@@ -78,7 +78,7 @@ public class KeepsRepository : BaseRepository
   }
 
 
-  public void Delete(int id)
+  public void DeleteKeep(int id)
   {
     _db.Execute("DELETE FROM keeps WHERE id = @id", new { id });
   }
@@ -91,12 +91,11 @@ public class KeepsRepository : BaseRepository
 
   internal Keep EditKeep(Keep data)
   {
+    // img = @Img,
     var sql = @"
     UPDATE keeps SET
       name = @Name,
-      img = @Img,
       description = @Description,
-      views = @Views,
       kept = @Kept
     WHERE id = @id
     ;";
