@@ -24,6 +24,7 @@ public class VaultsService
 
 
 
+  // FIXME: System.InvalidOperationException: Unable to resolve service for type 'Keeper.Se'
   internal Vault CreateVault(Vault newVault)
   {
     return _vr.CreateVault(newVault);
