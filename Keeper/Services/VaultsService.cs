@@ -11,4 +11,32 @@ public class VaultsService
     _vr = vr;
     _vkRepo = vkRepo;
   }
+
+
+
+
+
+  // get by id
+
+
+
+
+
+
+
+  internal Vault CreateVault(Vault newVault)
+  {
+    return _vr.CreateVault(newVault);
+  }
+
+
+  // delete
+
+
+
+
+
+
+
+  // edit
 }

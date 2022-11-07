@@ -27,4 +27,34 @@ public class VaultsRepository : BaseRepository
   //     return keep;
   //   }, new { vaultId }).ToList();
   // }
+
+
+
+
+
+
+
+  internal Vault CreateVault(Vault newVault)
+  {
+    var sql = @"
+    INSERT INTO vaults(name, description, isPrivate, img)
+    VALUES(@Name, @Description, @IsPrivate, @Img);
+    SELECT LAST_INSERT_ID()
+    ;";
+
+    int newVaultId = _db.ExecuteScalar<int>(sql, newVault);
+    newVault.Id = newVaultId;
+    return newVault;
+  }
+
+
+  // delete
+
+
+
+
+
+
+
+  // edit
 }
