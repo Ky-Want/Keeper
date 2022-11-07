@@ -1,12 +1,14 @@
 namespace Keeper.Repositories;
 
 
+// NOTE: left join adds everything in, 
+// NOTE: inner join gets rid of duplicate data
+
+
 public class KeepsRepository : BaseRepository
 {
   internal List<Keep> GetKeeps()
   {
-    // NOTE: left join adds everything in, 
-    // NOTE: inner join gets rid of duplicate data
     var sql = @"
       SELECT 
       k.*,
@@ -20,6 +22,26 @@ public class KeepsRepository : BaseRepository
       ke.Creator = p;
       return ke;
     }).ToList();
+  }
+
+
+  internal Keep GetKeepById(int id)
+  {
+    var sql = @"
+    SELECT
+    k.*,
+    a.*
+    FROM keeps k
+    JOIN accounts a ON a.id = k.creatorId
+    WHERE k.id = @id
+      GROUP BY k.id
+    ;";
+
+    return _db.Query<Keep, Profile, Keep>(sql, (keep, p) =>
+    {
+      keep.Creator = p;
+      return keep;
+    }, new { id }).FirstOrDefault();
   }
 
 
@@ -56,7 +78,34 @@ public class KeepsRepository : BaseRepository
   }
 
 
+  public void Delete(int id)
+  {
+    _db.Execute("DELETE FROM keeps WHERE id = @id", new { id });
+  }
 
+
+
+
+
+
+
+  internal Keep EditKeep(Keep data)
+  {
+    var sql = @"
+    UPDATE keeps SET
+      name = @Name,
+      img = @Img,
+      description = @Description,
+      views = @Views,
+      kept = @Kept
+    WHERE id = @id
+    ;";
+
+    data.UpdatedAt = DateTime.Now;
+    _db.Execute(sql, data);
+
+    return data;
+  }
 
 
 

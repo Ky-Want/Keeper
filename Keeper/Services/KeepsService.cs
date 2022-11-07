@@ -20,6 +20,20 @@ public class KeepsService
   }
 
 
+  internal Keep GetKeepById(int id)
+  {
+    var keep = _keepsRepo.GetKeepById(id);
+    if (keep == null)
+    {
+      throw new Exception("That Keep Id Does Not Exist");
+    }
+    keep.Views++;
+    // EditKeep(keep);
+
+    return keep;
+  }
+
+
 
 
 
