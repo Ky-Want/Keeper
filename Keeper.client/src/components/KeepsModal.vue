@@ -1,9 +1,4 @@
 <template>
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#KeepModal">
-    Launch static backdrop modal
-  </button>
-
   <!-- Modal -->
   <div class="modal fade" id="KeepModal" data-bs-backdrop="static" data-bs-keyboard="false"
     aria-labelledby="KeepModalLabel" aria-hidden="true">
@@ -34,8 +29,13 @@
             <!-- how many people have view and saved this keep -->
             <!-- FIXME: can't get the i tags to flex next to each other -->
             <div class="row d-flex justify-content-center mb-3 mt-2">
-              <i class="fa-solid fa-eye"></i>
-              <i class="fa-solid fa-k"></i>
+              <div>
+                <i class="fa-solid fa-eye"></i> 10
+              </div>
+
+              <div>
+                <i class="fa-solid fa-k"></i> 5
+              </div>
             </div>
 
 

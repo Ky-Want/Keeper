@@ -1,7 +1,8 @@
 <template>
+  <KeepsModal />
 
   <div class="grid-container div-container mt-5">
-    <div class="div-container">
+    <div class="div-container" data-bs-toggle="modal" data-bs-target="#KeepModal">
 
       <!-- Keep image + title -->
       <img class='grid-item selectable img-grey'
@@ -20,6 +21,7 @@
         </p>
       </div>
     </div>
+
 
 
     <!-- #region: delete these later -->
@@ -122,8 +124,27 @@
     </div>
     <!-- #endregion -->
   </div>
-
 </template>
+
+
+
+
+
+
+<script>
+import KeepsModal from "./KeepsModal.vue";
+
+
+export default {
+  setup() {
+
+    return {
+
+    };
+  },
+  components: { KeepsModal }
+}
+</script>
 
 
 
