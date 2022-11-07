@@ -2,21 +2,21 @@
   <!-- Cover Image -->
   <div class="container mt-5">
     <div class="d-flex justify-content-center">
-      <img src="//thiscatdoesnotexist.com" alt="cover image" class="mh-1 under">
+      <img
+        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapertag.com%2Fwallpaper%2Ffull%2F4%2F3%2F2%2F465141-beautiful-anime-wallpaper-1920x1200-for-4k.jpg&f=1&nofb=1&ipt=ac3e330a39e1aca1f7ee46a30e783255978882c9f479a5428151336cb74e8e4a&ipo=images"
+        alt="cover image" class="coverImg under">
 
       <!-- user picture -->
-      <!-- <div class="rounded-circle border border-none d-flex justify-content-center"> -->
       <img
         src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallup.net%2Fwp-content%2Fuploads%2F2019%2F09%2F1005109-picture-abandoned-lake-color-nice-leaves-shore-autumn-splendor-dock-water-house-mirrored-boat-river-pretty-landscape-mountain-autumn-colors-nature-weather-tree-pier-green-houses-forgot-3.jpg&f=1&nofb=1&ipt=1ba40cb7bab9f6551a2cab69de20f8bb066499dda93455dbafd71e6c5f961a2e&ipo=images"
-        alt="user image" class="rounded-circle over font-2">
-      <!-- </div> -->
+        alt="user image" class="rounded-circle over userImg">
     </div>
   </div>
 
 
   <div class="container lower-section">
     <!-- name -->
-    <h1 class="text-center mb-4">Ky Want</h1>
+    <h1 class="text-center mb-4 aref">Ky Want</h1>
 
     <!-- number of owned keeps and vaults -->
     <div class="d-flex gap-4 justify-content-center mb-5 pb-3">
@@ -67,19 +67,22 @@ export default {
 
 
 <style scoped>
-.font-2 {
+.aref {
+  font-family: 'Aref Ruqaa Ink', serif;
+}
+
+.userImg {
   height: 10rem;
   width: 10rem;
 }
 
-.mh-1 {
-  max-height: 20rem;
-  max-width: 25rem;
+.coverImg {
+  height: 30rem;
 }
 
 .lower-section {
   position: relative;
-  top: 28rem;
+  top: 40rem;
 }
 
 .under {
@@ -89,7 +92,7 @@ export default {
 
 .over {
   position: absolute;
-  top: 23rem;
+  top: 32rem;
   z-index: -1;
 }
 </style>

@@ -17,8 +17,12 @@
             <!-- close btn + creator pic -->
             <div class="d-flex justify-content-between">
               <!-- picture and onHover name of the creator of this keep -->
-              <img src="//thiscatdoesnotexist.com" alt="Keep Creator Pic" title="Keep creator name"
-                class="creator-pic rounded-circle selectable">
+              <router-link :to="{ name: 'Account' }">
+                <div>
+                  <img src="//thiscatdoesnotexist.com" data-bs-dismiss="modal" alt="Keep Creator Pic"
+                    title="Keep creator name" class="creator-pic rounded-circle selectable">
+                </div>
+              </router-link>
 
               <!-- close modal -->
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

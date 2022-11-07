@@ -1,13 +1,15 @@
 <template>
   <KeepsModal />
 
-  <div class="grid-container div-container mt-5">
-    <div class="div-container" data-bs-toggle="modal" data-bs-target="#KeepModal">
+  <div class="grid-container div-container mt-5 mb-5">
+    <div class="div-container">
 
       <!-- Keep image + title -->
-      <img class='grid-item selectable img-grey'
-        src='https://images.unsplash.com/photo-1544568100-847a948585b9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ'
-        alt='Keep image title' title="Keep Image Title">
+      <div data-bs-toggle="modal" data-bs-target="#KeepModal">
+        <img class='grid-item selectable img-grey'
+          src='https://images.unsplash.com/photo-1544568100-847a948585b9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ'
+          alt='Keep image title' title="Keep Image Title">
+      </div>
 
 
       <!-- Keep name -->
@@ -16,9 +18,11 @@
 
 
         <!-- Profile picture of keep creator -->
-        <p><img src="//thiscatdoesnotexist.com" alt="profile pic" title="Keep Creator"
-            class="img-fluid profile-pic selectable rounded-circle">
-        </p>
+        <router-link :to="{ name: 'Account' }">
+          <p><img src="//thiscatdoesnotexist.com" alt="profile pic" title="Keep Creator"
+              class="img-fluid profile-pic selectable rounded-circle">
+          </p>
+        </router-link>
       </div>
     </div>
 

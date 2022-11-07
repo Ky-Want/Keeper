@@ -23,17 +23,21 @@
               CREATE
             </a>
 
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item text-green" href="#">
-                  <strong>new keep</strong>
-                </a></li>
 
-              <li><a class="dropdown-item text-danger" href="#">
-                  <strong>new vault</strong>
-                </a></li>
+
+            <!-- FIXME: make button elsewhere to test -->
+            <!-- <NewKeep /> -->
+            <ul class="dropdown-menu">
+              <div class="dropdown-item text-green" data-bs-toggle="modal" data-bs-target="#NewKeep">
+                <strong>new keep</strong>
+              </div>
+
+              <!-- <NewVault /> -->
+              <div class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#NewVault">
+                <strong>new vault</strong>
+              </div>
             </ul>
           </div>
-          <!-- </router-link> -->
         </li>
       </ul>
 
@@ -51,12 +55,15 @@
 
 
 <script>
+import NewVault from "./Forms/NewVault.vue";
+import NewKeep from "./Forms/NewKeep.vue"
 import Login from './Login.vue'
+
 export default {
   setup() {
     return {}
   },
-  components: { Login }
+  components: { Login, NewVault, NewKeep }
 }
 </script>
 

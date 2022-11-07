@@ -49,16 +49,15 @@ CREATE TABLE
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
         -- 
         name VARCHAR(255) NOT NULL,
-        img VARCHAR(255) NOT NULL,
-        description VARCHAR(255) NOT NULL,
+        img VARCHAR(300) NOT NULL,
+        description VARCHAR(500) NOT NULL,
         -- 
         views int NOT NULL,
         kept int NOT NULL,
         --
         creatorId VARCHAR(255) NOT NULL,
         -- 
-        FOREIGN KEY (creatorId) REFERENCES accounts(id),
-        FOREIGN KEY (kept) REFERENCES vaults(id)
+        FOREIGN KEY (creatorId) REFERENCES accounts(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';
 
 --
@@ -78,6 +77,5 @@ CREATE TABLE
         keepId int NOT NULL,
         -- 
         FOREIGN KEY (creatorId) REFERENCES accounts(id),
-        FOREIGN KEY (vaultId) REFERENCES vaults(id),
-        FOREIGN KEY (keepId) REFERENCES keeps(id)
+        FOREIGN KEY (vaultId) REFERENCES vaults(id)
     ) default charset utf8 COMMENT '';
