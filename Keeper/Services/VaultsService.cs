@@ -14,12 +14,16 @@ public class VaultsService
 
 
 
-  internal Vault GetVaultById(int vaultId)
+  internal Vault GetVaultById(int vaultId, string userId)
   {
     Vault foundVault = _vr.GetVaultById(vaultId);
     if (foundVault == null)
     {
       throw new Exception("Vault does not exist.");
+    }
+    if (foundVault.IsPrivate == true && foundVault.CreatorId != userId)
+    {
+      throw new Exception("You are not authorized to view that vault.");
     }
     return foundVault;
   }
@@ -38,6 +42,21 @@ public class VaultsService
 
 
   // delete
+  public string DeleteVault(int vaultId, string userId)
+  {
+    var vault = GetVaultById(vaultId, userId);
+    if (vault.CreatorId != userId)
+    {
+      throw new Exception("You are not authorized to delete this vault.");
+    }
+
+    var deleted = _vr.DeleteVault(vaultId);
+    if (!deleted)
+    {
+      throw new Exception("Delete vault failed");
+    }
+    return "Successfully deleted vault";
+  }
 
 
 
