@@ -58,9 +58,8 @@ public class VaultsController : ControllerBase
   }
 
 
-  // delete
   [Authorize]
-  [HttpDelete]
+  [HttpDelete("{id}")]
   public async Task<ActionResult<Vault>> DeleteVault(int id)
   {
     try

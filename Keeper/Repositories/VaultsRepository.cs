@@ -58,7 +58,6 @@ public class VaultsRepository : BaseRepository
   }
 
 
-  // FIXME: failing both tests
   public bool DeleteVault(int id)
   {
     return _db.Execute("DELETE FROM vaults WHERE id = @id", new { id }) == 1;

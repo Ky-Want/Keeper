@@ -41,7 +41,6 @@ public class VaultsService
 
 
 
-  // delete
   public string DeleteVault(int vaultId, string userId)
   {
     var vault = GetVaultById(vaultId, userId);
@@ -64,16 +63,19 @@ public class VaultsService
 
 
 
-  public Vault EditVault(Vault vault, Account userId)
+  internal Vault EditVault(Vault vault, Account userInfo)
   {
-    var original = GetVaultById(vault.Id);
-    if (original.CreatorId != userId)
+    var original = GetVaultById(vault.Id, userInfo.Id);
+    if (original.CreatorId != userInfo.Id)
     {
       throw new Exception("You are not authorized to edit this vault.");
     }
 
+    // TODO set or statements
     original.Name = vault.Name;
     original.IsPrivate = vault.IsPrivate;
+    original.Img = vault.Img;
+    original.Description = vault.Description;
 
     var updated = _vr.EditVault(original);
     return updated;
