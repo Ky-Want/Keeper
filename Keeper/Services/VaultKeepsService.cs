@@ -13,9 +13,9 @@ public class VaultKeepsService
 
 
 
-  internal VaultKeep CreateVaultKeep(VaultKeep newVaultKeep)
+  internal VaultKeep GetVaultKeepByVaultId()
   {
-    return _vkRepo.CreateVaultKeep(newVaultKeep);
+    throw new Exception();
   }
 
 
@@ -24,17 +24,28 @@ public class VaultKeepsService
 
 
 
-  internal void DeleteVaultKeep(int VaultKeepId, string userId)
-  {
-    VaultKeep foundKeep = _vkRepo.GetVaultKeepById(VaultKeepId);
-    if (foundKeep == null)
-    {
-      throw new Exception("Unable to find Vault Keep");
-    }
+  // internal VaultKeep CreateVaultKeep(VaultKeep newVaultKeep)
+  // {
+  //   return _vkRepo.CreateVaultKeep(newVaultKeep);
+  // }
 
-    if (foundKeep.AccountId != userId)
-    {
-      throw new Exception("Unauthorized request made to delete Vault Keep");
-    }
-  }
+
+
+
+
+
+
+  // internal void DeleteVaultKeep(int VaultKeepId, string userId)
+  // {
+  //   VaultKeep foundKeep = _vkRepo.GetVaultKeepByVaultId(VaultKeepId);
+  //   if (foundKeep == null)
+  //   {
+  //     throw new Exception("Unable to find Vault Keep");
+  //   }
+
+  //   if (foundKeep.AccountId != userId)
+  //   {
+  //     throw new Exception("Unauthorized request made to delete Vault Keep");
+  //   }
+  // }
 }

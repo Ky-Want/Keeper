@@ -18,16 +18,13 @@ public class VaultKeepsController : ControllerBase
 
 
 
-
-  [HttpPost]
-  public async Task<ActionResult<VaultKeep>> CreateVaultKeep([FromBody] VaultKeep newVaultKeep)
+  [HttpGet("{id}/vaultkeeps")]
+  public ActionResult<List<VaultKeep>> GetVaultKeepByVaultId(int id)
   {
     try
     {
-      Account userInfo = await _a0.GetUserInfoAsync<Account>(HttpContext);
-      newVaultKeep.AccountId = userInfo.Id;
-      VaultKeep createdVaultKeep = _vks.CreateVaultKeep(newVaultKeep);
-      return Ok(createdVaultKeep);
+      var vaultKeeps = _vks.GetVaultKeepByVaultId(id);
+      return Ok(vaultKeeps);
     }
     catch (Exception e)
     {
@@ -40,18 +37,40 @@ public class VaultKeepsController : ControllerBase
 
 
 
-  [HttpDelete("{VaultId}")]
-  public async Task<ActionResult<VaultKeep>> DeleteVaultKeep(int VaultKeepId)
-  {
-    try
-    {
-      Account userInfo = await _a0.GetUserInfoAsync<Account>(HttpContext);
-      _vks.DeleteVaultKeep(VaultKeepId, userInfo.Id);
-      return Ok("Vault Keep Successfully Deleted");
-    }
-    catch (Exception e)
-    {
-      return BadRequest(e.Message);
-    }
-  }
+
+  // [HttpPost]
+  // public async Task<ActionResult<VaultKeep>> CreateVaultKeep([FromBody] VaultKeep newVaultKeep)
+  // {
+  //   try
+  //   {
+  //     Account userInfo = await _a0.GetUserInfoAsync<Account>(HttpContext);
+  //     newVaultKeep.AccountId = userInfo.Id;
+  //     VaultKeep createdVaultKeep = _vks.CreateVaultKeep(newVaultKeep);
+  //     return Ok(createdVaultKeep);
+  //   }
+  //   catch (Exception e)
+  //   {
+  //     return BadRequest(e.Message);
+  //   }
+  // }
+
+
+
+
+
+
+  // [HttpDelete("{id}")]
+  // public async Task<ActionResult<string>> DeleteVaultKeep(int id)
+  // {
+  //   try
+  //   {
+  //     var userInfo = await _a0.GetUserInfoAsync<Account>(HttpContext);
+  //     _vks.DeleteVaultKeep(id, userInfo?.Id);
+  //     return Ok("Vault Keep Successfully Deleted");
+  //   }
+  //   catch (Exception e)
+  //   {
+  //     return BadRequest(e.Message);
+  //   }
+  // }
 }
