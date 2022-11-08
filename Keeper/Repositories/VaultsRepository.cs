@@ -70,5 +70,17 @@ public class VaultsRepository : BaseRepository
 
 
 
-  // edit
+  public Vault EditVault(Vault data)
+  {
+    var sql = @"
+    UPDATE vaults SET
+      name = @Name,
+      isPrivate = @IsPrivate
+    WHERE id = @id
+    ;";
+
+    int id = _db.ExecuteScalar<int>(sql, data);
+    data.Id = id;
+    return data;
+  }
 }

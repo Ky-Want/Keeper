@@ -14,9 +14,9 @@ public class VaultsService
 
 
 
-  internal Vault GetVaultById(int vaultId, string userId)
+  internal Vault GetVaultById(int id, string userId)
   {
-    Vault foundVault = _vr.GetVaultById(vaultId);
+    Vault foundVault = _vr.GetVaultById(id);
     if (foundVault == null)
     {
       throw new Exception("Vault does not exist.");
@@ -64,5 +64,18 @@ public class VaultsService
 
 
 
-  // edit
+  public Vault EditVault(Vault vault, Account userId)
+  {
+    var original = GetVaultById(vault.Id);
+    if (original.CreatorId != userId)
+    {
+      throw new Exception("You are not authorized to edit this vault.");
+    }
+
+    original.Name = vault.Name;
+    original.IsPrivate = vault.IsPrivate;
+
+    var updated = _vr.EditVault(original);
+    return updated;
+  }
 }

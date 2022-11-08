@@ -81,5 +81,21 @@ public class VaultsController : ControllerBase
 
 
 
-  // edit
+  [Authorize]
+  [HttpPut("{id}")]
+  public async Task<ActionResult<Vault>> EditVault([FromBody] Vault data, int id)
+  {
+    try
+    {
+      Account userInfo = await _a0.GetUserInfoAsync<Account>(HttpContext);
+      data.Id = id;
+
+      Vault vault = _vs.EditVault(data, userInfo);
+      return Ok(vault);
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
 }
