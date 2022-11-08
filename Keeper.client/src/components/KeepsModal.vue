@@ -31,7 +31,6 @@
 
 
             <!-- how many people have view and saved this keep -->
-            <!-- FIXME: can't get the i tags to flex next to each other -->
             <div class="row mt-3 mb-5 pb-2">
               <div class="d-flex gap-5 justify-content-center">
                 <i class="fa-solid fa-eye"> - 31</i> <i class="fa-solid fa-k"> - 42</i>

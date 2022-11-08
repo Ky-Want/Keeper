@@ -3,12 +3,7 @@ namespace Keeper.Repositories;
 
 public class VaultKeepsRepository : BaseRepository
 {
-  public VaultKeepsRepository(IDbConnection db) : base(db)
-  {
-  }
-
-
-  public List<VaultKeep> GetVaultKeepByVaultId(int vaultKeepId)
+  public List<VaultKeep> GetKeepByVaultId(int id)
   {
     var sql = @"
     SELECT
@@ -23,7 +18,7 @@ public class VaultKeepsRepository : BaseRepository
     {
       vk.Creator = p;
       return vk;
-    }, new { vaultKeepId }).ToList();
+    }, new { id }).ToList();
   }
 
 
@@ -31,33 +26,42 @@ public class VaultKeepsRepository : BaseRepository
 
 
 
-  // internal void DeleteVaultKeep(VaultKeep foundKeep)
-  // {
-  //   var sql = @"
-  //   DELETE FROM vaultKeeps
-  //   WHERE id = @Id
-  //   LIMIT 1
-  //   ;";
+  internal VaultKeep CreateVaultKeep(VaultKeep newVaultKeep)
+  {
+    var sql = @"
+  INSERT INTO vaultKeeps(
+    vaultId, 
+    keepId
+  )VALUES(
+    @VaultId,
+    @KeepId
+  );
+  SELECT LAST_INSERT_ID()
+  ;";
 
-  //   _db.Execute(sql, foundKeep);
-  // }
+    int id = _db.ExecuteScalar<int>(sql, newVaultKeep);
+    newVaultKeep.Id = id;
+    return newVaultKeep;
+  }
 
 
 
-  // internal VaultKeep CreateVaultKeep(VaultKeep newVaultKeep)
-  // {
-  //   var sql = @"
-  //   INSERT INTO vaultKeeps(
-  //     vaultId, 
-  //     keepId)
-  //   VALUES(
-  //     @VaultId, 
-  //     @KeepId);
-  //   SELECT LAST_INSERT_ID()
-  //   ;";
+  internal void DeleteVaultKeep(VaultKeep foundKeep)
+  {
+    var sql = @"
+    DELETE FROM vaultKeeps
+    WHERE id = @Id
+    LIMIT 1
+    ;";
 
-  //   int id = _db.ExecuteScalar<int>(sql, newVaultKeep);
-  //   newVaultKeep.Id = id;
-  //   return newVaultKeep;
-  // }
+    _db.Execute(sql, foundKeep);
+  }
+
+
+
+
+
+  public VaultKeepsRepository(IDbConnection db) : base(db)
+  {
+  }
 }

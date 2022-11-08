@@ -7,18 +7,20 @@ public class VaultsController : ControllerBase
 {
   private readonly Auth0Provider _a0;
   private readonly VaultsService _vs;
+  private readonly VaultKeepsService _vks;
 
-  public VaultsController(Auth0Provider a0, VaultsService vs)
+  public VaultsController(Auth0Provider a0, VaultsService vs, VaultKeepsService vks)
   {
     _a0 = a0;
     _vs = vs;
+    _vks = vks;
   }
 
 
 
 
   [HttpGet("{vaultId}")]
-  public async Task<ActionResult<Vault>> GetVaultByIdAsync(int vaultId)
+  public async Task<ActionResult<Vault>> GetVaultById(int vaultId)
   {
     try
     {

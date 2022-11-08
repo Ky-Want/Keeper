@@ -4,48 +4,23 @@ namespace Keeper.Services;
 public class VaultKeepsService
 {
   private readonly VaultKeepsRepository _vkRepo;
+  private readonly VaultKeepsRepository _vaultRepo;
+  private readonly VaultsService _vs;
 
-  public VaultKeepsService(VaultKeepsRepository vkRepo)
+  public VaultKeepsService(VaultKeepsRepository vkRepo, VaultKeepsRepository vaultRepo, VaultsService vs)
   {
     _vkRepo = vkRepo;
+    _vaultRepo = vaultRepo;
+    _vs = vs;
   }
 
 
-
-
-  internal VaultKeep GetVaultKeepByVaultId()
-  {
-    throw new Exception();
-  }
+  // create
 
 
 
 
 
 
-
-  // internal VaultKeep CreateVaultKeep(VaultKeep newVaultKeep)
-  // {
-  //   return _vkRepo.CreateVaultKeep(newVaultKeep);
-  // }
-
-
-
-
-
-
-
-  // internal void DeleteVaultKeep(int VaultKeepId, string userId)
-  // {
-  //   VaultKeep foundKeep = _vkRepo.GetVaultKeepByVaultId(VaultKeepId);
-  //   if (foundKeep == null)
-  //   {
-  //     throw new Exception("Unable to find Vault Keep");
-  //   }
-
-  //   if (foundKeep.AccountId != userId)
-  //   {
-  //     throw new Exception("Unauthorized request made to delete Vault Keep");
-  //   }
-  // }
+  // delete
 }
