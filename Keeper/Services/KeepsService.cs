@@ -28,7 +28,6 @@ public class KeepsService
       throw new Exception("That Keep Id Does Not Exist");
     }
     keep.Views++;
-    // EditKeep(keep);
 
     return keep;
   }
