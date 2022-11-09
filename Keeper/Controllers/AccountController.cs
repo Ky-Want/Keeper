@@ -19,7 +19,22 @@ public class AccountController : ControllerBase
 
 
   // get my vaults
+  [HttpGet("{id}/vaults")]
+  public async Task<ActionResult<List<MyKeeps>>> GetMyVaults(string id)
+  {
+    try
+    {
+      var userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
+      var myVaults = _accountService.GetMyVaults(userInfo?.Id);
 
+      return Ok(myVaults);
+
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
 
 
 

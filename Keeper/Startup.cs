@@ -31,14 +31,14 @@ public class Startup
     services.AddSingleton<Auth0Provider>();
     services.AddScoped<IDbConnection>(x => CreateDbConnection());
 
-    services.AddScoped<AccountsRepository>();
-    services.AddScoped<AccountService>();
-
 
 
 
 
     // Added transients
+    services.AddScoped<AccountsRepository>();
+    services.AddScoped<AccountService>();
+
     services.AddTransient<KeepsRepository>();
     services.AddTransient<KeepsService>();
 

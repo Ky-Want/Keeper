@@ -27,29 +27,41 @@ public class ProfilesRepository
 
 
 
-  // get a users keeps
-  // public List<MyKeep> GetMyKeeps(string creatorId)
-  // {
-  //   var sql = @"
-  //     SELECT 
-  //       keep.*,
-  //       a.*,
-  //       vault.*
-  //     FROM keeps keep
-  //     JOIN accounts a ON a.id = keep.creatorId
-  //     JOIN vaults vault ON vault.id = keep.vaultId
-  //     WHERE keep.creatorId = @creatorId
-  //   ;";
+  public List<MyKeeps> GetUsersKeeps(string id)
+  {
+    var sql = @"
+      SELECT 
+        k.*,
+        a.*
+      FROM keeps k
+      JOIN accounts a ON a.id = k.creatorId
+      WHERE creatorId = @id
+    ;";
 
-  // return _db.Query<MyKeep, Profile, Vault, MyKeep>(sql, (mk, profile, vault) =>
-  // {
-  //   mk.Vault = vault;
-  //   mk.Creator = profile;
-  //   return mk;
-  // }, new { creatorId }).ToList();
-  // }
+    return _db.Query<MyKeeps, Profile, MyKeeps>(sql, (mk, profile) =>
+    {
+      mk.Creator = profile;
+      return mk;
+    }, new { id }).ToList();
+  }
 
 
-  // get a users vaults
 
+  public List<Vault> GetUsersVaults(string id)
+  {
+    var sql = @"
+    SELECT
+    v.*,
+    a.*
+    FROM vaults v
+    JOIN accounts a ON a.id = v.creatorId
+    WHERE creatorId = @id
+    ;";
+
+    return _db.Query<Vault, Profile, Vault>(sql, (v, p) =>
+    {
+      v.Creator = p;
+      return v;
+    }, new { id }).ToList();
+  }
 }

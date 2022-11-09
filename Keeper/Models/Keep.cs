@@ -25,3 +25,10 @@ public class KeepsInVault : Keep
 {
   public int VaultKeepId { get; set; }
 }
+
+
+
+public class MyKeeps : Keep
+{
+  public Vault Vault { get; set; }
+}

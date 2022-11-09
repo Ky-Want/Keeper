@@ -27,11 +27,15 @@ public class ProfileService
 
 
 
-  // public List<MyKeep> GetMyKeeps(string creatorId)
-  // {
-  //   return _pRepo.GetMyKeeps(creatorId);
-  // }
+  public List<MyKeeps> GetUsersKeeps(string id)
+  {
+    return _pRepo.GetUsersKeeps(id);
+  }
 
 
-  // get a users vaults
+
+  public List<Vault> GetMyVaults(string id)
+  {
+    return _pRepo.GetUsersVaults(id);
+  }
 }

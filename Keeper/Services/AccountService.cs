@@ -2,9 +2,9 @@ namespace Keeper.Services;
 
 public class AccountService
 {
-  private readonly AccountsRepository _repo;
+  private readonly AccountRepository _repo;
 
-  public AccountService(AccountsRepository repo)
+  public AccountService(AccountRepository repo)
   {
     _repo = repo;
   }
@@ -14,7 +14,10 @@ public class AccountService
 
 
   // get my vaults
-
+  public List<MyKeeps> GetMyVaults(string id)
+  {
+    return _repo.GetMyVaults(id);
+  }
 
 
 

@@ -1,10 +1,10 @@
 namespace Keeper.Repositories;
 
-public class AccountsRepository
+public class AccountRepository
 {
   private readonly IDbConnection _db;
 
-  public AccountsRepository(IDbConnection db)
+  public AccountRepository(IDbConnection db)
   {
     _db = db;
   }
@@ -14,7 +14,26 @@ public class AccountsRepository
 
 
   // get my vaults
+  public List<MyKeeps> GetMyVaults(string id)
+  {
+    var sql = @"
+      SELECT 
+        keep.*,
+        a.*,
+        vault.*
+      FROM keeps keep
+        JOIN accounts a ON a.id = keep.creatorId
+        JOIN vaults vault ON vault.id = keep.vaultId
+      WHERE keep.creatorId = @creatorId
+    ;";
 
+    return _db.Query<MyKeeps, Profile, Vault, MyKeeps>(sql, (mk, profile, vault) =>
+    {
+      mk.Vault = vault;
+      mk.Creator = profile;
+      return mk;
+    }, new { id }).ToList();
+  }
 
 
 

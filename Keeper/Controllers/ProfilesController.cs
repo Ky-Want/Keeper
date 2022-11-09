@@ -38,23 +38,35 @@ public class ProfilesController : ControllerBase
 
 
 
-  // [HttpGet("{id}/keeps")]
-  // public async Task<ActionResult<List<Profile>>> GetMyKeeps()
-  // {
-  //   try
-  //   {
-  //     var userInfo = await _a0.GetUserInfoAsync<Account>(HttpContext);
-  //     var myKeeps = _ps.GetMyKeeps(userInfo?.Id);
+  [HttpGet("{id}/keeps")]
+  public ActionResult<List<MyKeeps>> GetUsersKeeps(string id)
+  {
+    try
+    {
+      var myKeeps = _ps.GetUsersKeeps(id);
 
-  //     return Ok(myKeeps);
+      return Ok(myKeeps);
 
-  //   }
-  //   catch (Exception e)
-  //   {
-  //     return BadRequest(e.Message);
-  //   }
-  // }
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
 
 
-  // get a users vaults
+
+  [HttpGet("{id}/vaults")]
+  public ActionResult<List<Vault>> GetUsersVaults(string id)
+  {
+    try
+    {
+      var myVaults = _ps.GetMyVaults(id);
+      return Ok(myVaults);
+    }
+    catch (Exception e)
+    {
+      return BadRequest(e.Message);
+    }
+  }
 }
