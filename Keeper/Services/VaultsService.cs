@@ -17,19 +17,12 @@ public class VaultsService
 
 
 
-
-
-
-
   internal List<KeepsInVault> GetVaultKeepsByVaultId(int id, string userInfo)
   {
     List<KeepsInVault> vaultKeeps = _vkr.GetVaultKeepsByVaultId(id);
 
     return vaultKeeps;
   }
-
-
-
 
 
 
