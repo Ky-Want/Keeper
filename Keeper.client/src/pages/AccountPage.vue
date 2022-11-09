@@ -24,16 +24,16 @@
     </div>
 
 
+    <!-- owned vaults -->
+    <div class="mt-5 mb-5 pb-5">
+      <h2 class="px-5"><strong>Vaults</strong></h2>
+    </div>
+
+
     <!-- owned keeps -->
     <div>
       <h2 class="px-5"><strong>Keeps</strong></h2>
       <Keeps />
-    </div>
-
-
-    <!-- owned vaults -->
-    <div class="mt-5 mb-5 pb-5">
-      <h2 class="px-5"><strong>Vaults</strong></h2>
     </div>
   </div>
 </template>

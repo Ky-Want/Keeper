@@ -4,11 +4,41 @@ namespace Keeper.Services;
 public class VaultsService
 {
   private readonly VaultsRepository _vr;
+  private readonly VaultKeepsRepository _vkr;
 
-  public VaultsService(VaultsRepository vr)
+  public VaultsService(VaultsRepository vr, VaultKeepsRepository vkr)
   {
     _vr = vr;
+    _vkr = vkr;
   }
+
+
+
+
+
+
+
+
+
+
+  internal List<VaultKeep> GetVaultKeepById(int id, string userInfo)
+  {
+    List<VaultKeep> vaultKeeps = _vr.GetVaultById(id);
+
+    return vaultKeeps;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -31,14 +61,10 @@ public class VaultsService
 
 
 
-
-
-
   internal Vault CreateVault(Vault newVault)
   {
     return _vr.CreateVault(newVault);
   }
-
 
 
   public string DeleteVault(int vaultId, string userId)
@@ -60,9 +86,6 @@ public class VaultsService
 
 
 
-
-
-
   internal Vault EditVault(Vault vault, Account userInfo)
   {
     var original = GetVaultById(vault.Id, userInfo.Id);
@@ -80,4 +103,5 @@ public class VaultsService
     var updated = _vr.EditVault(original);
     return updated;
   }
+
 }

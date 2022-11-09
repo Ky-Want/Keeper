@@ -3,22 +3,14 @@ namespace Keeper.Repositories;
 
 public class VaultKeepsRepository : BaseRepository
 {
-  public List<VaultKeep> GetKeepByVaultId(int id)
+  // FIXME: Parameter '@VaultId' must be defined.To use this as a variable, set 'Allow Use
+  internal VaultKeep GetVaultKeepById(int id)
   {
     var sql = @"
-    SELECT
-    vk.*,
-    a.*
-    FROM vaultKeeps vk
-    JOIN accounts a ON a.id = vk.creatorId
-    WHERE vk.vaultId = @vaultId
+    SELECT * FROM vaultKeeps WHERE id = @id
     ;";
 
-    return _db.Query<VaultKeep, Profile, VaultKeep>(sql, (vk, p) =>
-    {
-      vk.Creator = p;
-      return vk;
-    }, new { id }).ToList();
+    return _db.QueryFirstOrDefault<VaultKeep>(sql, new { id });
   }
 
 
@@ -26,6 +18,14 @@ public class VaultKeepsRepository : BaseRepository
 
 
 
+
+
+
+
+
+
+
+  // FIXME: Parameter '@VaultId' must be defined. To use this as a variable, set 'Allow User Variables=true' in the connection string.
   internal VaultKeep CreateVaultKeep(VaultKeep newVaultKeep)
   {
     var sql = @"
@@ -46,15 +46,19 @@ public class VaultKeepsRepository : BaseRepository
 
 
 
-  internal void DeleteVaultKeep(VaultKeep foundKeep)
+
+
+
+
+
+  // FIXME: Parameter '@VaultId' must be defined. To use this as a variable, set 'Allow Use
+  internal void DeleteVaultKeep(VaultKeep foundVK)
   {
     var sql = @"
-    DELETE FROM vaultKeeps
-    WHERE id = @Id
-    LIMIT 1
+    DELETE FROM vaultKeeps WHERE id = @Id LIMIT 1
     ;";
 
-    _db.Execute(sql, foundKeep);
+    _db.Execute(sql, foundVK);
   }
 
 
