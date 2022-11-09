@@ -36,7 +36,7 @@ public class Startup
 
 
     // Added transients
-    services.AddScoped<AccountsRepository>();
+    services.AddScoped<AccountRepository>();
     services.AddScoped<AccountService>();
 
     services.AddTransient<KeepsRepository>();
