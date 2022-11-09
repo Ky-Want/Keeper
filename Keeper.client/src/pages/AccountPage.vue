@@ -28,7 +28,7 @@
 
     <!-- owned vaults -->
     <h2 class="px-5 pb-5 mb-3"><strong>Vaults</strong></h2>
-
+    <!-- vault cards -->
     <div class="d-flex pb-5">
       <div class="card selectable">
         <h3 class="title">Vault 1</h3>
@@ -75,7 +75,7 @@
       <Keeps />
     </div>
   </div>
-
+  <!-- keep cards -->
   <div class="keeps-position">
     <KeepsCard />
   </div>
