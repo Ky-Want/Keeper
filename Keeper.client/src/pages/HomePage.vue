@@ -1,7 +1,30 @@
 <template>
+
+  <Keeps />
+
+
   <div v-for="k in keep" :key="k.id" :keep="k">
 
-    <Keeps />
+    <div class="div-container">
+      <!-- Keep image + title -->
+      <div data-bs-toggle="modal" data-bs-target="#KeepModal">
+        <img class='grid-item selectable img-grey' :src="keep.img" alt='Keep image title' :title="keep.creator">
+      </div>
+
+
+      <!-- Keep name -->
+      <div class="d-flex justify-content-between">
+        <p>{{ keep.description }}</p>
+
+
+        <!-- Profile picture of keep creator -->
+        <router-link :to="{ name: 'Account' }">
+          <p><img :src="account.picture" alt="profile pic" :title="account.name"
+              class="img-fluid profile-pic selectable rounded-circle">
+          </p>
+        </router-link>
+      </div>
+    </div>
 
   </div>
 </template>
