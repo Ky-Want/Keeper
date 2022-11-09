@@ -5,7 +5,6 @@ namespace Keeper.Models;
 public class Keep : ICreated, IRepoItem<int>
 {
   public int Id { get; set; }
-  public int vaultId { get; set; }
 
   public Profile Creator { get; set; }
   public string CreatorId { get; set; }
@@ -18,4 +17,11 @@ public class Keep : ICreated, IRepoItem<int>
 
   public DateTime CreatedAt { get; set; }
   public DateTime UpdatedAt { get; set; }
+}
+
+
+
+public class KeepsInVault : Keep
+{
+  public int VaultKeepId { get; set; }
 }

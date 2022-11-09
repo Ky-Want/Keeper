@@ -3,14 +3,26 @@ namespace Keeper.Repositories;
 
 public class VaultKeepsRepository : BaseRepository
 {
-  // FIXME: Parameter '@VaultId' must be defined.To use this as a variable, set 'Allow Use
-  internal VaultKeep GetVaultKeepById(int id)
+  internal List<KeepsInVault> GetVaultKeepsByVaultId(int id)
   {
     var sql = @"
-    SELECT * FROM vaultKeeps WHERE id = @id
+    SELECT
+    a.*,
+    k.*,
+    vk.id AS vaultKeepId
+    FROM vaultKeeps vk 
+
+    JOIN accounts a ON vk.creatorId = a.id
+    JOIN keeps k ON vk.keepId = k.id
+
+    WHERE vk.vaultId = @id
     ;";
 
-    return _db.QueryFirstOrDefault<VaultKeep>(sql, new { id });
+    return _db.Query<Profile, KeepsInVault, KeepsInVault>(sql, (p, kv) =>
+    {
+      kv.Creator = p;
+      return kv;
+    }, new { id }).ToList();
   }
 
 
@@ -25,16 +37,19 @@ public class VaultKeepsRepository : BaseRepository
 
 
 
-  // FIXME: Parameter '@VaultId' must be defined. To use this as a variable, set 'Allow User Variables=true' in the connection string.
+  // REVIEW: Parameter '@VaultId' must be defined. To use this as a variable, set 'Allow User Variables=true' in the connection string.
+  // ^  = missing inserts (id & creatorId)
   internal VaultKeep CreateVaultKeep(VaultKeep newVaultKeep)
   {
     var sql = @"
   INSERT INTO vaultKeeps(
     vaultId, 
-    keepId
+    keepId,
+    creatorId
   )VALUES(
     @VaultId,
-    @KeepId
+    @KeepId,
+    @CreatorId
   );
   SELECT LAST_INSERT_ID()
   ;";
@@ -51,7 +66,6 @@ public class VaultKeepsRepository : BaseRepository
 
 
 
-  // FIXME: Parameter '@VaultId' must be defined. To use this as a variable, set 'Allow Use
   internal void DeleteVaultKeep(VaultKeep foundVK)
   {
     var sql = @"
@@ -64,6 +78,11 @@ public class VaultKeepsRepository : BaseRepository
 
 
 
+  internal VaultKeep GetById(int id)
+  {
+    var sql = "SELECT * FROM vaultKeeps WHERE id = @id";
+    return _db.QueryFirstOrDefault<VaultKeep>(sql, new { id });
+  }
 
   public VaultKeepsRepository(IDbConnection db) : base(db)
   {

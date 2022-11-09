@@ -1,8 +1,10 @@
 namespace Keeper.Models;
 
 
-public class VaultKeep : Vault
+public class VaultKeep
 {
+  public int Id { get; set; }
+  public string CreatorId { get; set; }
   public int KeepId { get; set; }
-  public string AccountId { get; set; }
+  public int VaultId { get; set; }
 }

@@ -16,11 +16,6 @@ public class VaultKeepsService
 
 
 
-
-
-
-
-
   internal VaultKeep CreateVaultKeep(VaultKeep newVaultKeep)
   {
     return _vkRepo.CreateVaultKeep(newVaultKeep);
@@ -34,14 +29,16 @@ public class VaultKeepsService
 
 
 
+
+
   internal void DeleteVaultKeep(int id, string userId)
   {
-    VaultKeep foundVK = _vkRepo.GetVaultKeepById(id);
+    VaultKeep foundVK = _vkRepo.GetById(id);
     if (foundVK == null)
     {
       throw new Exception("Unable to find vault keep");
     }
-    if (foundVK.AccountId != userId)
+    if (foundVK.CreatorId != userId)
     {
       throw new Exception("Unauthorized to remove vault keep");
     }
