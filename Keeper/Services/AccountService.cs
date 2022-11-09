@@ -9,10 +9,37 @@ public class AccountService
     _repo = repo;
   }
 
+
+
+
+
+  // get my vaults
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   internal Account GetProfileByEmail(string email)
   {
     return _repo.GetByEmail(email);
   }
+
 
   internal Account GetOrCreateProfile(Account userInfo)
   {
@@ -23,6 +50,12 @@ public class AccountService
     }
     return profile;
   }
+
+
+
+
+
+
 
   internal Account Edit(Account editData, string userEmail)
   {

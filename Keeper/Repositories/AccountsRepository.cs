@@ -13,6 +13,25 @@ public class AccountsRepository
 
 
 
+  // get my vaults
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   internal Account GetByEmail(string userEmail)
   {
     string sql = "SELECT * FROM accounts WHERE email = @userEmail";
