@@ -2,21 +2,17 @@
   <!-- Cover Image -->
   <div class="container mt-5">
     <div class="d-flex justify-content-center">
-      <img
-        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallpapertag.com%2Fwallpaper%2Ffull%2F4%2F3%2F2%2F465141-beautiful-anime-wallpaper-1920x1200-for-4k.jpg&f=1&nofb=1&ipt=ac3e330a39e1aca1f7ee46a30e783255978882c9f479a5428151336cb74e8e4a&ipo=images"
-        alt="cover image" class="coverImg under">
+      <img :src="account.coverImg" alt="cover image" class="coverImg under">
 
       <!-- user picture -->
-      <img
-        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwallup.net%2Fwp-content%2Fuploads%2F2019%2F09%2F1005109-picture-abandoned-lake-color-nice-leaves-shore-autumn-splendor-dock-water-house-mirrored-boat-river-pretty-landscape-mountain-autumn-colors-nature-weather-tree-pier-green-houses-forgot-3.jpg&f=1&nofb=1&ipt=1ba40cb7bab9f6551a2cab69de20f8bb066499dda93455dbafd71e6c5f961a2e&ipo=images"
-        alt="user image" class="rounded-circle over userImg">
+      <img :src="account.picture" alt="user image" class="rounded-circle over userImg">
     </div>
   </div>
 
 
   <div class="container lower-section">
     <!-- name -->
-    <h1 class="text-center mb-4 aref">Ky Want</h1>
+    <h1 class="text-center mb-4 aref">{{ account.name }}</h1>
 
     <!-- number of owned keeps and vaults -->
     <div class="d-flex gap-4 justify-content-center mb-5 pb-3">
@@ -34,6 +30,7 @@
     </div>
   </div>
   <!-- keep cards -->
+  <!-- v-for="k in keeps" :key="k.id" :keep="k" -->
   <div class="keeps-position">
     <KeepsCard />
   </div>

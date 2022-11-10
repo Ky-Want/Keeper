@@ -4,6 +4,6 @@ export class Account {
     this.email = data.email
     this.name = data.name
     this.picture = data.picture
-    this.coverImg = data.coverImg
+    this.coverImg = data.coverImg || data.coverImg == "//thiscatdoesnotexist.com"
   }
 }

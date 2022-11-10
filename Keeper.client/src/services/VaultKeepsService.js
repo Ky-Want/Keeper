@@ -1,8 +1,34 @@
+import { AppState } from "../AppState.js"
+import { logger } from "../utils/Logger.js"
+import { api } from "./AxiosService.js"
 
 
 
 class VaultKeepsService {
-  // when a keep is kept in a vault the keep count++
+  async getVaultKeeps(vaultId) {
+    const res = await api.get('api/vaultKeeps/' + vaultId + '/keeps')
+    logger.log(res.data)
+    AppState.vaultKeep = res.data
+  }
+
+
+  async getMyVaultKeeps() {
+    const res = await api.get('account/')
+    logger.log('[Get My Vault Keeps]', res.data)
+    AppState.activeVaultKeep = res.data
+  }
+
+
+
+
+
+
+  async createVaultKeep(data, vaultId) {
+    const res = await api.post('api/vaultKeeps/' + vaultId + '/keeps', data)
+    logger.log(res.data)
+    AppState.vaultKeep.push(res.data)
+    AppState.vaultKeep.kept++
+  }
 }
 
 

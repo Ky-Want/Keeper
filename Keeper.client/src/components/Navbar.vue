@@ -13,35 +13,7 @@
     </button>
 
 
-    <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <li>
-          <!-- <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase"> -->
-          <div class="dropdown text-primary selectable">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
-              CREATE
-            </a>
-
-
-
-            <!-- FIXME: make button elsewhere to test -->
-            <!-- <NewKeep /> -->
-            <ul class="dropdown-menu">
-              <div class="dropdown-item text-green" data-bs-toggle="modal" data-bs-target="#NewKeep">
-                <strong>new keep</strong>
-              </div>
-
-              <!-- <NewVault /> -->
-              <div class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#NewVault">
-                <strong>new vault</strong>
-              </div>
-            </ul>
-          </div>
-        </li>
-      </ul>
-
-
+    <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarText">
       <!-- LOGIN COMPONENT -->
       <Login />
     </div>
@@ -55,15 +27,13 @@
 
 
 <script>
-import NewVault from "./Forms/NewVault.vue";
-import NewKeep from "./Forms/NewKeep.vue"
 import Login from './Login.vue'
 
 export default {
   setup() {
     return {}
   },
-  components: { Login, NewVault, NewKeep }
+  components: { Login }
 }
 </script>
 
