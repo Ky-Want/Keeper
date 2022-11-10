@@ -6,18 +6,18 @@
 
       <!-- Keep image + title -->
       <div data-bs-toggle="modal" data-bs-target="#KeepModal">
-        <img class='grid-item selectable img-grey' :src='keeps.img' alt='Keep image' :title="keeps.name">
+        <img class='grid-item selectable img-grey' :src='keep?.img' alt='Keep image' :title="keep?.name">
       </div>
 
 
       <!-- Keep name -->
       <div class="d-flex justify-content-between">
-        <p>{{ keeps.description }}</p>
+        <p>{{ keep?.description }}</p>
 
 
         <!-- Profile picture of keep creator -->
         <router-link :to="{ name: 'Account' }">
-          <p><img :src="account.picture" alt="profile pic" :title="keeps.creator"
+          <p><img :src="account?.picture" alt="profile pic" :title="keep?.creator"
               class="img-fluid profile-pic selectable rounded-circle">
           </p>
         </router-link>
@@ -34,17 +34,23 @@
 
 <script>
 import KeepsModal from "./KeepsModal.vue";
+import { Keep } from "../models/Keep.js";
 
 import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState.js";
 
 
 export default {
+  props: {
+    keep: {
+      type: Keep
+    }
+  },
   setup() {
 
     return {
       account: computed(() => AppState.account),
-      keeps: computed(() => AppState.keep)
+      keep: computed(() => AppState.keep)
     };
   },
 

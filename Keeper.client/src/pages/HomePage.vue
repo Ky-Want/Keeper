@@ -32,7 +32,7 @@
 
 
   <div v-for="k in keeps" :key="k.id" :keep="k">
-    <Keeps />
+    <KeepsCard />
   </div>
 
 </template>
@@ -46,6 +46,7 @@
 <script>
 import Keeps from "../components/KeepsCard.vue";
 import { keepsService } from "../services/KeepsService.js";
+import KeepsCard from "../components/KeepsCard.vue";
 
 import { computed } from "@vue/reactivity";
 import { onMounted } from "vue";
@@ -59,8 +60,8 @@ import NewVault from "../components/Forms/NewVault.vue";
 
 
 export default {
-  setup() {
 
+  setup() {
     async function getKeeps() {
       try {
         await keepsService.getKeeps()
@@ -76,12 +77,12 @@ export default {
 
     return {
       account: computed(() => AppState.account),
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keep)
     };
   },
 
 
-  components: { Keeps, NewKeep, NewVault }
+  components: { Keeps, NewKeep, NewVault, KeepsCard }
 }
 </script>
 
@@ -103,10 +104,6 @@ body {
   align-items: center;
   flex-direction: column;
   font-family: sans-serif;
-}
-
-h1 {
-  color: coral;
 }
 
 .grid-container {

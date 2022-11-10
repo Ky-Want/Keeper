@@ -87,10 +87,21 @@
 
 
 <script>
+import { Account } from "../models/Account.js";
+import { Keep } from "../models/Keep.js";
+
 export default {
+  // props: {
+  //   keep: {
+  //     type: Keep,
+  //     required: true
+  //   },
+  //   account: {
+  //     type: Account
+  //   }
+  // },
 
   setup() {
-
     return {
 
     }
