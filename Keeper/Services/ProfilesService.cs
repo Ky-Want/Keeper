@@ -33,9 +33,15 @@ public class ProfileService
   }
 
 
-
-  public List<Vault> GetMyVaults(string id)
+  public List<Vault> GetUsersVaults(string id)
   {
-    return _pRepo.GetUsersVaults(id);
+    if (id == null)
+    {
+      throw new Exception("Invalid id: Get users vault in profile service");
+    }
+
+    List<Vault> vaults = _pRepo.GetUsersVaults(id);
+    vaults = vaults.FindAll(v => v.IsPrivate == false || v.CreatorId != id);
+    return vaults;
   }
 }

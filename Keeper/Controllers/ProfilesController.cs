@@ -61,7 +61,7 @@ public class ProfilesController : ControllerBase
   {
     try
     {
-      var myVaults = _ps.GetMyVaults(id);
+      var myVaults = _ps.GetUsersVaults(id);
       return Ok(myVaults);
     }
     catch (Exception e)

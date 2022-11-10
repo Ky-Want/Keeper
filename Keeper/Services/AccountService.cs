@@ -3,10 +3,12 @@ namespace Keeper.Services;
 public class AccountService
 {
   private readonly AccountRepository _repo;
+  private readonly ProfilesRepository _pr;
 
-  public AccountService(AccountRepository repo)
+  public AccountService(AccountRepository repo, ProfilesRepository pr)
   {
     _repo = repo;
+    _pr = pr;
   }
 
 
@@ -14,11 +16,11 @@ public class AccountService
 
 
   // get my vaults
-  public List<MyKeeps> GetMyVaults(string id)
+  internal List<Vault> GetMyVaults(string id)
   {
-    return _repo.GetMyVaults(id);
+    List<Vault> vaults = _pr.GetUsersVaults(id);
+    return vaults;
   }
-
 
 
 

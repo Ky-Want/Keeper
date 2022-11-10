@@ -14,25 +14,21 @@ public class AccountRepository
 
 
   // get my vaults
-  public List<MyKeeps> GetMyVaults(string id)
+  public List<Vault> GetMyVaults()
   {
     var sql = @"
       SELECT 
-        keep.*,
-        a.*,
-        vault.*
-      FROM keeps keep
-        JOIN accounts a ON a.id = keep.creatorId
-        JOIN vaults vault ON vault.id = keep.vaultId
-      WHERE keep.creatorId = @creatorId
+        vault.*,
+        a.*
+      FROM vaults vault
+        JOIN accounts a ON a.id = vault.creatorId
     ;";
 
-    return _db.Query<MyKeeps, Profile, Vault, MyKeeps>(sql, (mk, profile, vault) =>
+    return _db.Query<Vault, Profile, Vault>(sql, (vault, profile) =>
     {
-      mk.Vault = vault;
-      mk.Creator = profile;
-      return mk;
-    }, new { id }).ToList();
+      vault.Creator = profile;
+      return vault;
+    }).ToList();
   }
 
 

@@ -9,7 +9,7 @@ public class VaultsRepository : BaseRepository
 
 
 
-  // NOTE: if this breaks it's line 21's fault
+
   internal Vault GetVaultById(int vaultId)
   {
     var sql = @"
@@ -18,7 +18,6 @@ public class VaultsRepository : BaseRepository
     a.*
     FROM vaults v
     JOIN accounts a ON a.id = v.creatorId
-    WHERE v.isPrivate = false
     WHERE v.id = @vaultId
     ;";
 

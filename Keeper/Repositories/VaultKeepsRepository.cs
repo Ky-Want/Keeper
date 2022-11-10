@@ -7,16 +7,14 @@ public class VaultKeepsRepository : BaseRepository
   {
     var sql = @"
     SELECT
-    a.*,
-    k.*,
-    vk.id AS vaultKeepId
+      a.*,
+      k.*,
+      vk.id AS vaultKeepId
     FROM vaultKeeps vk 
-
     JOIN accounts a ON vk.creatorId = a.id
     JOIN keeps k ON vk.keepId = k.id
-
-    WHERE vk.vaultId = @id
-    ;";
+    WHERE vk.vaultId = @id;
+    ";
 
     return _db.Query<Profile, KeepsInVault, KeepsInVault>(sql, (p, kv) =>
     {

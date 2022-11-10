@@ -17,8 +17,10 @@ public class VaultsService
 
 
 
-  internal List<KeepsInVault> GetVaultKeepsByVaultId(int id, string userInfo)
+  internal List<KeepsInVault> GetVaultKeepsByVaultId(int id, string userId)
   {
+    // vaults = vaults.FindAll(v => v.IsPrivate == false || v.CreatorId != id);
+    GetVaultById(id, userId);
     List<KeepsInVault> vaultKeeps = _vkr.GetVaultKeepsByVaultId(id);
 
     return vaultKeeps;
@@ -87,7 +89,6 @@ public class VaultsService
       throw new Exception("You are not authorized to edit this vault.");
     }
 
-    // TODO set or statements
     original.Name = vault.Name;
     original.IsPrivate = vault.IsPrivate;
     original.Img = vault.Img;
