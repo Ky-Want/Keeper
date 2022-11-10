@@ -50,12 +50,13 @@ import { api } from "../services/AxiosService.js";
 
 export default {
   setup() {
+
     async function getKeeps() {
       try {
         await keepsService.getKeeps()
       } catch (error) {
-        Pop.error('[Getting keeps: home page]')
-        logger.error(error, "[Getting keeps: home page]")
+        Pop.error('Getting keeps failed')
+        logger.error(error, "Home page")
       }
     }
 
@@ -64,7 +65,7 @@ export default {
     })
 
     return {
-
+      keeps: computed(() => AppState.keeps)
     };
   },
 

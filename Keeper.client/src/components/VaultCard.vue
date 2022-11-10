@@ -4,16 +4,18 @@
 
   <!-- vault cards -->
   <div class="d-flex pb-5">
-    <div class="card selectable">
+    <div class="card">
       <h3 class="title">Vault 1</h3>
       <div class="bar">
         <div class="emptybar"></div>
         <div class="filledbar"></div>
       </div>
       <div class="pt-5 mt-4">
-        <img
-          src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flbpost.com%2Fhi-lo%2Fwp-content%2Fuploads%2F2017%2F09%2FLOKI_in_the_window.jpg&f=1&nofb=1&ipt=49f0a21c54405a86c3db2dc2513f0701f51344fa64e962e9cb2df8057197e565&ipo=images"
-          alt="" class="rounded vaultImg">
+        <router-link :to="{ name: 'Vault' }">
+          <img
+            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flbpost.com%2Fhi-lo%2Fwp-content%2Fuploads%2F2017%2F09%2FLOKI_in_the_window.jpg&f=1&nofb=1&ipt=49f0a21c54405a86c3db2dc2513f0701f51344fa64e962e9cb2df8057197e565&ipo=images"
+            alt="" class="rounded vaultImg selectable">
+        </router-link>
       </div>
     </div>
 
