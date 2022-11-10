@@ -1,6 +1,5 @@
 <template>
-  <div class="modal fade bg-dark" id="NewVault" data-bs-keyboard="false" aria-labelledby="NewVaultLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="NewVault" data-bs-keyboard="false" aria-labelledby="NewVaultLabel" aria-hidden="true">
     <div class="elevation-2 p-2 mx-5 modal-dialog">
       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       <h1 class="text-center mb-5">Create New Vault Form</h1>

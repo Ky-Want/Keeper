@@ -1,30 +1,25 @@
 <template>
 
-  <div class="div-container mt-5 mb-5">
-    <div class="">
-
-      <!-- Keep image + title -->
-      <div data-bs-toggle="modal" data-bs-target="#KeepModal" @click="setActiveKeep">
-        <img class='grid-item selectable img-grey' :src="keep?.img" alt='Keep image' :title="keep?.name">
-      </div>
+  <div class="div-container grid-container mt-5">
+    <!-- Keep image + title -->
+    <div data-bs-toggle="modal" data-bs-target="#KeepModal" @click="setActiveKeep">
+      <img class='grid-item selectable img-grey' :src="keep?.img" alt='Keep image' :title="keep?.name">
+    </div>
 
 
-      <!-- Keep name -->
-      <div class="d-flex justify-content-between">
-        <p>{{ keep?.description }}</p>
+    <!-- Keep name -->
+    <div class="d-flex justify-content-between">
+      <p>{{ keep?.name }}</p>
 
 
-        <!-- Profile picture of keep creator -->
-        <!-- FIXME: need to go to the profile page -->
-        <router-link :to="{ name: 'Account' }">
-          <p><img :src="keep?.creator?.picture" alt="profile pic" :title="keep?.creator?.name"
-              class="img-fluid profile-pic selectable rounded-circle">
-          </p>
-        </router-link>
-      </div>
+      <!-- Profile picture of keep creator -->
+      <router-link :to="{ name: 'Profile' }">
+        <p><img :src="keep?.creator?.picture" alt="profile pic" :title="keep?.creator?.name"
+            class="img-fluid profile-pic selectable rounded-circle">
+        </p>
+      </router-link>
     </div>
   </div>
-
 
 </template>
 
@@ -57,7 +52,6 @@ export default {
       setActiveKeep() {
         AppState.activeKeep = props.keep
       }
-      // keep: computed(() => AppState.keeps)
     };
   },
 
@@ -76,14 +70,6 @@ export default {
 .profile-pic {
   max-width: 1.5rem;
   max-height: 1.5rem;
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-family: sans-serif;
 }
 
 .grid-container {

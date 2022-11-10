@@ -16,15 +16,13 @@ public class VaultKeepsService
 
 
 
-  internal VaultKeep CreateVaultKeep(VaultKeep newVaultKeep)
+  internal VaultKeep CreateVaultKeep(VaultKeep newVaultKeep, Account userInfo)
   {
-
-    // FIXME check if the vault creator 
-    // is the currently logged in user
-    // to do this you will need to get 
-    // the vault...
-
-
+    var vault = _vs.GetVaultById(newVaultKeep.VaultId, userInfo.Id);
+    if (vault.CreatorId != userInfo.Id)
+    {
+      throw new Exception("create vaultKeep check");
+    }
 
     return _vkRepo.CreateVaultKeep(newVaultKeep);
   }
