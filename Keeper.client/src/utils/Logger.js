@@ -11,7 +11,6 @@ function log(type, content) {
         return
     }
 
-    // TODO SEND LOGS TO EXTERNAL SERVICE
     // eslint-disable-next-line no-console
     console[type](`[${type}] :: ${new Date().toLocaleTimeString()} :: `, ...content)
   }

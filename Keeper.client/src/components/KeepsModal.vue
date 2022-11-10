@@ -8,7 +8,7 @@
         <!-- picture of the keep -->
         <div class="modal-body row">
           <div class="col-7">
-            <img src="//thiscatdoesnotexist.com" alt="" class="img-fluid rounded">
+            <img :src="keep?.img" alt="keep image" class="img-fluid rounded">
           </div>
 
 
@@ -19,8 +19,8 @@
               <!-- picture and onHover name of the creator of this keep -->
               <router-link :to="{ name: 'Account' }">
                 <div>
-                  <img src="//thiscatdoesnotexist.com" data-bs-dismiss="modal" alt="Keep Creator Pic"
-                    title="Keep creator name" class="creator-pic rounded-circle selectable">
+                  <img :src="keep.creator?.picture" data-bs-dismiss="modal" alt="Keep Creator Pic"
+                    :title="keep.creator?.name" class="creator-pic rounded-circle selectable">
                 </div>
               </router-link>
 
@@ -33,7 +33,7 @@
             <!-- how many people have view and saved this keep -->
             <div class="row mt-3 mb-5 pb-2">
               <div class="d-flex gap-5 justify-content-center">
-                <i class="fa-solid fa-eye"> - 31</i> <i class="fa-solid fa-k"> - 42</i>
+                <i class="fa-solid fa-eye"> - {{ keep?.views }}</i> <i class="fa-solid fa-k"> - {{ keep?.kept }}</i>
               </div>
             </div>
 
@@ -41,12 +41,8 @@
 
             <!-- The title and description of this keep -->
             <div class="row mb-3">
-              <h2 class="d-flex justify-content-center">Cat</h2>
-              <p class="d-flex justify-content-center">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Voluptatem nesciunt modi totam odit,
-                consectetur Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint impedit dignissimos tenetur
-                praesentium accusamus mollitia illum labore blanditiis perspiciatis consequuntur, vitae, veritatis
-                maxime, in harum fugit excepturi magni exercitationem quibusdam?</p>
+              <h2 class="d-flex justify-content-center">{{ keep?.name }}</h2>
+              <p class="d-flex justify-content-center">{{ keep?.description }}</p>
             </div>
 
 
@@ -54,13 +50,13 @@
             <!-- Save keep to specified vault -->
             <div class="row d-flex justify-content-between">
               <div class="dropdown text-primary selectable col-5">
-                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                <a class="btn btn-secondary dropdown-toggle" href="#chooseVault" role="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
                   Vault
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item text-green" href="#">
+                    <a class="dropdown-item text-green" href="#chooseVault">
                       vault name
                     </a>
                   </li>
@@ -87,25 +83,24 @@
 
 
 <script>
-import { Account } from "../models/Account.js";
-import { Keep } from "../models/Keep.js";
+import { computed } from "@vue/reactivity";
+import { AppState } from "../AppState.js";
+
 
 export default {
   // props: {
   //   keep: {
   //     type: Keep,
   //     required: true
-  //   },
-  //   account: {
-  //     type: Account
   //   }
   // },
+  setup(props) {
 
-  setup() {
     return {
-
-    }
-  }
+      account: computed(() => AppState.account),
+      keep: computed(() => AppState.activeKeep)
+    };
+  },
 }
 </script>
 

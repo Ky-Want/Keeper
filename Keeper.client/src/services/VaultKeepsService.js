@@ -26,8 +26,8 @@ class VaultKeepsService {
   async createVaultKeep(data, vaultId) {
     const res = await api.post('api/vaultKeeps/' + vaultId + '/keeps', data)
     logger.log(res.data)
-    AppState.vaultKeep.push(res.data)
-    AppState.vaultKeep.kept++
+    AppState.vaultKeeps.push(res.data)
+    AppState.vaultKeeps.kept++
   }
 }
 

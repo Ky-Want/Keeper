@@ -1,12 +1,11 @@
 <template>
-  <KeepsModal />
 
-  <body class="grid-container div-container mt-5 mb-5">
-    <div class="div-container">
+  <div class="div-container mt-5 mb-5">
+    <div class="">
 
       <!-- Keep image + title -->
-      <div data-bs-toggle="modal" data-bs-target="#KeepModal">
-        <img class='grid-item selectable img-grey' :src='keep?.img' alt='Keep image' :title="keep?.name">
+      <div data-bs-toggle="modal" data-bs-target="#KeepModal" @click="setActiveKeep">
+        <img class='grid-item selectable img-grey' :src="keep?.img" alt='Keep image' :title="keep?.name">
       </div>
 
 
@@ -16,15 +15,17 @@
 
 
         <!-- Profile picture of keep creator -->
+        <!-- FIXME: need to go to the profile page -->
         <router-link :to="{ name: 'Account' }">
-          <p><img :src="account?.picture" alt="profile pic" :title="keep?.creator"
+          <p><img :src="keep?.creator?.picture" alt="profile pic" :title="keep?.creator?.name"
               class="img-fluid profile-pic selectable rounded-circle">
           </p>
         </router-link>
       </div>
     </div>
+  </div>
 
-  </body>
+
 </template>
 
 
@@ -43,14 +44,20 @@ import { AppState } from "../AppState.js";
 export default {
   props: {
     keep: {
-      type: Keep
+      type: Keep,
+      required: true
     }
   },
-  setup() {
+  setup(props) {
+
 
     return {
       account: computed(() => AppState.account),
-      keep: computed(() => AppState.keep)
+
+      setActiveKeep() {
+        AppState.activeKeep = props.keep
+      }
+      // keep: computed(() => AppState.keeps)
     };
   },
 

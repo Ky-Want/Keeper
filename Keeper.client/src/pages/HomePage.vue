@@ -1,22 +1,23 @@
 <template>
 
+
+
+
+  <!-- create forms -->
   <div class="d-flex justify-content-end m-3 mt-4">
     <ul class="navbar-nav me-auto">
       <li>
-        <!-- <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase"> -->
         <div class="dropdown text-primary selectable">
           <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             CREATE
           </a>
 
-          <NewKeep />
           <ul class="dropdown-menu">
             <div class="dropdown-item text-green" data-bs-toggle="modal" data-bs-target="#NewKeep">
               <strong>new keep</strong>
             </div>
 
-            <NewVault />
             <div class="dropdown-item text-danger" data-bs-toggle="modal" data-bs-target="#NewVault">
               <strong>new vault</strong>
             </div>
@@ -29,11 +30,15 @@
 
 
 
-
-
-  <div v-for="k in keeps" :key="k.id" :keep="k">
-    <KeepsCard />
+  <div class="grid-container">
+    <div v-for="k in keeps" :key="k.id">
+      <KeepsCard :keep="k" />
+    </div>
   </div>
+
+  <NewVault />
+  <NewKeep />
+  <KeepsModal />
 
 </template>
 
@@ -55,6 +60,7 @@ import { AppState } from "../AppState.js";
 import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
 
+import KeepsModal from "../components/KeepsModal.vue";
 import NewKeep from "../components/Forms/NewKeep.vue";
 import NewVault from "../components/Forms/NewVault.vue";
 
@@ -77,12 +83,12 @@ export default {
 
     return {
       account: computed(() => AppState.account),
-      keeps: computed(() => AppState.keep)
+      keeps: computed(() => AppState.keeps)
     };
   },
 
 
-  components: { Keeps, NewKeep, NewVault, KeepsCard }
+  components: { Keeps, NewKeep, NewVault, KeepsCard, KeepsModal }
 }
 </script>
 
@@ -96,14 +102,6 @@ export default {
 .profile-pic {
   max-width: 1.5rem;
   max-height: 1.5rem;
-}
-
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-family: sans-serif;
 }
 
 .grid-container {

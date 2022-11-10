@@ -12,6 +12,8 @@ const routes = [
     component: loadPage('HomePage')
   },
   {
+    // NOTE reference POST-IT or TOWER helpReviews
+    // FIXME vaults require a vaultId parameter
     path: '/vault',
     name: 'Vault',
     component: loadPage('VaultPage')
@@ -22,6 +24,8 @@ const routes = [
     component: loadPage('AccountPage'),
     beforeEnter: authGuard
   }
+  // FIXME need to add a profile page
+  // NOTE reference network or Artsy
 ]
 
 export const router = createRouter({

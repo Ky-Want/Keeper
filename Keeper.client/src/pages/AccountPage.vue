@@ -2,17 +2,17 @@
   <!-- Cover Image -->
   <div class="container mt-5">
     <div class="d-flex justify-content-center">
-      <img :src="account.coverImg" alt="cover image" class="coverImg under">
+      <img :src="account?.coverImg" alt="cover image" class="coverImg under">
 
       <!-- user picture -->
-      <img :src="account.picture" alt="user image" class="rounded-circle over userImg">
+      <img :src="account?.picture" alt="user image" class="rounded-circle over userImg">
     </div>
   </div>
 
 
   <div class="container lower-section">
     <!-- name -->
-    <h1 class="text-center mb-4 aref">{{ account.name }}</h1>
+    <h1 class="text-center mb-4 aref">{{ account?.name }}</h1>
 
     <!-- number of owned keeps and vaults -->
     <div class="d-flex gap-4 justify-content-center mb-5 pb-3">
@@ -30,9 +30,10 @@
     </div>
   </div>
   <!-- keep cards -->
-  <!-- v-for="k in keeps" :key="k.id" :keep="k" -->
-  <div class="keeps-position">
-    <KeepsCard />
+  <div class="grid-container">
+    <div v-for="k in keeps" :key="k.id">
+      <KeepsCard :keep="k" />
+    </div>
   </div>
 </template>
 
@@ -43,21 +44,45 @@
 
 
 <script>
-import { computed } from 'vue'
-import { AppState } from '../AppState'
 import Forms from "../components/Forms/NewVault.vue";
-import KeepsCard from "../components/KeepsCard.vue";
+import { computed, onMounted } from 'vue'
+import { AppState } from '../AppState'
+
 import VaultCard from "../components/VaultCard.vue";
+import KeepsCard from "../components/KeepsCard.vue";
+
+import { accountService } from "../services/AccountService.js";
+
+import { logger } from "../utils/Logger.js";
+import Pop from "../utils/Pop.js";
+
 
 
 export default {
+  // props: {
+  //   keep: {
+  //     type: Keep,
+  //     required: true
+  //   }
+  // },
   setup() {
-
+    async function getAccount() {
+      try {
+        await accountService.getAccount();
+      }
+      catch (error) {
+        Pop.error("Getting account failed");
+        logger.error(error, "Home page");
+      }
+    }
+    onMounted(() => {
+      getAccount();
+    });
     return {
       account: computed(() => AppState.account)
     };
   },
-  components: { Forms, KeepsCard, VaultCard }
+  components: { VaultCard, KeepsCard, Forms }
 }
 </script>
 
