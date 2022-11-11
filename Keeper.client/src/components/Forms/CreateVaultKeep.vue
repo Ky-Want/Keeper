@@ -1,7 +1,22 @@
 <template>
-  <div class="col-5" v-if="profile.id != account.id">
-    <button type="button" class="btns btn btn-primary d-flex align-items-center" @click="handleSubmit()">Save</button>
+  <!-- FIXME: draw my vaults to the drop downs -->
+  <div class="row d-flex justify-content-between" v-if="profile.id != account.id">
+    <button class="dropdown-toggle text-primary selectable col-5" type="button" data-bs-toggle="dropdown"
+      aria-expanded="false"></button>
+    <ul class="dropdown-menu">
+      <li class="dropdown-item selectable" @click="createVaultKeep()">
+        {{ vault?.name }}
+      </li>
+    </ul>
   </div>
+
+
+
+
+  <!-- FIXME: add keep to a vault -->
+  <!-- <div class="col-5" v-if="profile.id != account.id">
+    <button type="button" class="btns btn btn-primary d-flex align-items-center" @click="handleSubmit()">Save</button>
+  </div> -->
 </template>
 
 
@@ -32,8 +47,8 @@ export default {
           let newVaultKeep = await vaultkeepsService.createVaultKeep(vaultKeepData)
           console.log('Sending newVaultKeep form:', newVaultKeep);
         } catch (error) {
-          Pop.error(error, '[Submitting Event Form failed]')
-          logger.error(error, 'submitting create event form')
+          Pop.error(error, '[Submitting vaultKeep Form failed]')
+          logger.error(error, 'submitting create vaultKeep form')
         }
       },
 

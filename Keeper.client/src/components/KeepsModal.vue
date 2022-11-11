@@ -17,12 +17,19 @@
             <!-- close btn + creator pic -->
             <div class="d-flex justify-content-between">
               <!-- picture and onHover name of the creator of this keep -->
-              <router-link :to="{ name: 'Account' }">
+
+
+
+              <!-- FIXME -->
+              <router-link :to="{ name: 'Profile', params: { id: profile.id } }">
                 <div>
                   <img :src="keep.creator?.picture" data-bs-dismiss="modal" alt="Keep Creator Pic"
                     :title="keep.creator?.name" class="creator-pic rounded-circle selectable">
                 </div>
               </router-link>
+
+
+
 
               <!-- close modal -->
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -33,6 +40,7 @@
             <!-- how many people have view and saved this keep -->
             <div class="row mt-3 mb-5 pb-2">
               <div class="d-flex gap-5 justify-content-center">
+
                 <!-- FIXME: increment views and keeps -->
                 <i class="fa-solid fa-eye"> - {{ keep?.views }}</i> <i class="fa-solid fa-k"> - {{ keep?.kept
                 }}</i>
@@ -48,29 +56,7 @@
               <p class="d-flex justify-content-center">{{ keep?.description }}</p>
             </div>
 
-
-
-            <!-- Save keep to specified vault -->
-            <div class="row d-flex justify-content-between">
-              <div class="dropdown text-primary selectable col-5" v-if="profile.id != account.id">
-                <a class="btn btn-secondary dropdown-toggle" href="#chooseVault" role="button" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  Vault
-                </a>
-                <ul class="dropdown-menu">
-                  <li>
-                    <a class="dropdown-item text-green" href="#chooseVault" v-for="v in vault" :key="v.id">
-                      {{ vault?.name }}
-                    </a>
-                  </li>
-                </ul>
-              </div>
-
-
-
-
-              <CreateVaultKeep />
-            </div>
+            <CreateVaultKeep />
             <!-- #endregion -->
           </div>
         </div>
@@ -88,6 +74,8 @@
 <script>
 import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState.js";
+import { logger } from "../utils/Logger.js";
+import Pop from "../utils/Pop.js";
 import CreateVaultKeep from "./Forms/CreateVaultKeep.vue";
 
 

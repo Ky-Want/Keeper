@@ -3,7 +3,6 @@ import { logger } from '../utils/Logger'
 import { api } from './AxiosService'
 
 class AccountService {
-  // all users have a public profile page
   async getAccount() {
     try {
       const res = await api.get('/account')
@@ -19,7 +18,10 @@ class AccountService {
 
 
 
-  // user can edit their account
+  async editAccount(formData) {
+    const res = await api.put('/account', formData)
+    AppState.account = new Account(res.data)
+  }
 }
 
 export const accountService = new AccountService()

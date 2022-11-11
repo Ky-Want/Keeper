@@ -36,11 +36,7 @@
 
   <NewVault />
   <NewKeep />
-
-  <div @click="viewed()">
-    <KeepsModal />
-  </div>
-
+  <KeepsModal />
 </template>
 
 
@@ -87,7 +83,7 @@ export default {
       account: computed(() => AppState.account),
       keeps: computed(() => AppState.keeps),
       profile: computed(() => AppState.profile),
-      vaults: computed(() => AppState.vaults),
+      vaults: computed(() => AppState.vaults)
     };
   },
 

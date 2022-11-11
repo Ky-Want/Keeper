@@ -1,8 +1,9 @@
 <template>
+  <!-- FIXME: all users should have a public profile page -->
   <!-- Cover Image -->
   <div class="container mt-5">
     <div class="d-flex justify-content-center">
-      <img src="//thiscatdoesnotexist.com" alt="cover image" class="coverImg under">
+      <img :src="profile?.coverImg" alt="cover image" class="coverImg under">
 
       <!-- user picture -->
       <img :src="profile?.picture" alt="user image" class="rounded-circle over userImg">

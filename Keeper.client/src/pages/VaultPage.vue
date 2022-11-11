@@ -8,6 +8,8 @@
       <strong>{{ vaultKeeps.length }}</strong>
     </div>
 
+    <!-- FIXME: show only the vault keeps for this vault -->
+    <!-- FIXME: allow users to remove a keep from their vault -->
     <div class="grid-container">
       <div v-for="k in keeps" :key="k.id">
         <KeepsCard :keep="k" />

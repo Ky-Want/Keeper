@@ -1,8 +1,9 @@
 <template>
+  <EditAccountForm />
   <!-- Cover Image -->
   <div class="container mt-5">
     <div class="d-flex justify-content-center">
-      <img src="//thiscatdoesnotexist.com" alt="cover image" class="coverImg under">
+      <img :src="account?.coverImg" alt="cover image" class="coverImg under">
 
       <!-- user picture -->
       <img :src="account?.picture" alt="user image" class="rounded-circle over userImg">
@@ -16,7 +17,7 @@
 
     <!-- number of owned keeps and vaults -->
     <div class="d-flex gap-4 justify-content-center mb-5 pb-3">
-      <p>{{ vaults?.length }} vaults</p> | <p>{{ keeps.length }} keeps</p>
+      <p>{{ vaults?.length }} vaults</p> | <p>{{ keeps?.length }} keeps</p>
     </div>
 
 
@@ -35,6 +36,7 @@
       <KeepsCard :keep="k" />
     </div>
   </div>
+
 </template>
 
 
@@ -44,6 +46,7 @@
 
 
 <script>
+import EditAccountForm from "../components/Forms/EditAccountForm.vue";
 import Forms from "../components/Forms/NewVault.vue";
 import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
@@ -59,12 +62,6 @@ import Pop from "../utils/Pop.js";
 
 
 export default {
-  // props: {
-  //   keep: {
-  //     type: Keep,
-  //     required: true
-  //   }
-  // },
   setup() {
     async function getAccount() {
       try {
@@ -75,16 +72,18 @@ export default {
         logger.error(error, "Home page");
       }
     }
+
     onMounted(() => {
       getAccount();
     });
+
     return {
       account: computed(() => AppState.account),
       vaults: computed(() => AppState.vaults),
       keeps: computed(() => AppState.keeps)
     };
   },
-  components: { VaultCard, KeepsCard, Forms }
+  components: { VaultCard, KeepsCard, Forms, EditAccountForm }
 }
 </script>
 
