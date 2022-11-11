@@ -14,6 +14,14 @@
           </div>
 
 
+          <!-- description -->
+          <div class="form-floating mb-3">
+            <input v-model="editable.description" type="text" class="form-control" id="description"
+              placeholder="description" required>
+            <label for="floatingInput">Description</label>
+          </div>
+
+
           <!-- imgUrl -->
           <div class="form-floating mb-3">
             <input v-model="editable.img" type="url" class="form-control" id="imgUrl" placeholder="Input" required>

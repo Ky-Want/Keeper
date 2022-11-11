@@ -6,6 +6,7 @@
       <div class="filledbar"></div>
     </div>
     <div class="pt-5 mt-4">
+
       <div @click="vaultPage()">
         <img :src="vault?.img" alt="vault image" class="rounded vaultImg selectable">
       </div>
@@ -32,7 +33,7 @@ export default {
     }
   },
 
-  setup() {
+  setup(props) {
 
     return {
       async vaultPage() {

@@ -37,8 +37,10 @@ class ProfileService {
         creatorId
       }
     })
+    console.log(AppState.vaults);
     AppState.vaults = res.data.map(v => new Vault(v))
   }
+
 }
 
 

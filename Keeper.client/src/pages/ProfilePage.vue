@@ -24,8 +24,14 @@
     <h2 class="px-5 pb-5 mb-3"><strong>Vaults</strong></h2>
     <!-- vault cards -->
     <div class="d-flex pb-5">
-      <div v-for="v in vaults" :key="v.id">
+      <div v-for="v in myVaults" :key="v.id" v-if="account.id == profile.id">
         <VaultCard :vault="v" />
+      </div>
+
+      <div v-else>
+        <div v-for="v in vaults" :key="v.id">
+          <VaultCard :vault="v" />
+        </div>
       </div>
     </div>
 
@@ -105,7 +111,6 @@ export default {
 
 
 
-
     onMounted(() => {
       getUserById()
       getUserKeeps()
@@ -113,9 +118,11 @@ export default {
     });
 
     return {
+      account: computed(() => AppState.account),
       profile: computed(() => AppState.profile),
       keeps: computed(() => AppState.keeps),
-      vaults: computed(() => AppState.vaults)
+      vaults: computed(() => AppState.vaults),
+      myVaults: computed(() => AppState.profileVaults)
     };
   },
   components: { VaultCard, KeepsCard, Forms, KeepsModal }

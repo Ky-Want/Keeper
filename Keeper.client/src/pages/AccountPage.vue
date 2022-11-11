@@ -46,15 +46,15 @@
 
 
 <script>
-import EditAccountForm from "../components/Forms/EditAccountForm.vue";
 import Forms from "../components/Forms/NewVault.vue";
+import EditAccountForm from "../components/Forms/EditAccountForm.vue";
+import { accountService } from "../services/AccountService.js";
+
 import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
 
 import VaultCard from "../components/VaultCard.vue";
 import KeepsCard from "../components/KeepsCard.vue";
-
-import { accountService } from "../services/AccountService.js";
 
 import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
