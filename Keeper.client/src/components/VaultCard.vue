@@ -41,7 +41,7 @@ export default {
           if (props.vault.isPrivate == true && AppState.account.id != props.vault.creatorId) {
             router.push({ name: 'Home' })
           }
-          router.push({ name: 'Vault', params: { vaultId: props.vault.id } })
+          router.push({ name: 'Vault', params: { id: props.vault.id } })
         } catch (error) {
           logger.error(error)
         }

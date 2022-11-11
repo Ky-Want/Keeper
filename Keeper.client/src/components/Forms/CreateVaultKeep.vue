@@ -1,15 +1,12 @@
 <template>
-  <!-- FIXME: draw my vaults to the drop downs -->
   <div class="row d-flex justify-content-between" v-if="profile.id != account.id">
     <button class="dropdown-toggle text-primary selectable col-5" type="button" data-bs-toggle="dropdown"
-      aria-expanded="false"></button>
+      aria-expanded="false">Dropdown</button>
     <ul class="dropdown-menu">
 
 
-      <!-- FIXME: add keep to a vault -->
-      <!-- @click="createVaultKeep()" -->
-      <li class="dropdown-item selectable" @click="handleSubmit()">
-        {{ vault?.name }}
+      <li class="dropdown-item selectable" v-for="v in profileVaults" :key="v.id" @click="handleSubmit(v.id)">
+        {{ v.name }}
       </li>
     </ul>
   </div>
@@ -37,9 +34,9 @@ export default {
 
     return {
       editable,
-      async handleSubmit() {
+      async handleSubmit(vaultId) {
         try {
-          const vaultKeepData = editable.value
+          let vaultKeepData = { vaultId: vaultId, keepId: AppState.activeKeep.id }
           let newVaultKeep = await vaultkeepsService.createVaultKeep(vaultKeepData)
           console.log('Sending newVaultKeep form:', newVaultKeep);
         } catch (error) {
@@ -49,7 +46,10 @@ export default {
       },
 
       account: computed(() => AppState.account),
-      profile: computed(() => AppState.profile)
+      profileVaults: computed(() => AppState.profileVaults),
+      profile: computed(() => AppState.profile),
+      activeKeep: computed(() => AppState.activeKeep),
+
     }
   }
 }

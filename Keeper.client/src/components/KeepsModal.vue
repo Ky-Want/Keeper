@@ -41,7 +41,8 @@
               <div class="d-flex gap-5 justify-content-center">
 
                 <!-- FIXME: increment views and keeps -->
-                <i class="fa-solid fa-eye"> - {{ keep?.views }}</i> <i class="fa-solid fa-k"> - {{ keep?.kept
+                <i class="fa-solid fa-eye"> - {{ keep?.views }}</i> <i class="fa-solid fa-k"> - {{
+                    keep?.kept
                 }}</i>
               </div>
             </div>
