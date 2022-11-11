@@ -1,6 +1,4 @@
 <template>
-  <!-- FIXME: logged in user can edit their account -->
-
   <form class="card account-form" @submit.prevent="handleSubmit">
     <div class="card-body text-start">
 

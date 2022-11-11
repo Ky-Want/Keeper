@@ -6,8 +6,6 @@ import { api } from "./AxiosService.js"
 
 
 class ProfileService {
-  // FIXME: hitting profile instead of profiles
-  // also seems to be returning the id of keeps?
   async getUserById(creatorId) {
     const res = await api.get(`api/profiles/${creatorId}`, {
       params: {

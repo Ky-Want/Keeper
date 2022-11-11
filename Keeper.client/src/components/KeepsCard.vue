@@ -11,11 +11,9 @@
 
 
       <!-- Profile picture of keep creator -->
-      <!-- <router-link :to="{ name: 'Profile', params: { id: keep.id } }"> -->
       <p><img :src="keep?.creator?.picture" alt="profile pic" :title="keep?.creator?.name"
           class="img-fluid profile-pic selectable rounded-circle">
       </p>
-      <!-- </router-link> -->
     </div>
   </div>
 

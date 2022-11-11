@@ -28,19 +28,6 @@ public class AccountService
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
   internal Account GetProfileByEmail(string email)
   {
     return _repo.GetByEmail(email);
@@ -55,5 +42,32 @@ public class AccountService
       return _repo.Create(userInfo);
     }
     return profile;
+  }
+
+
+
+
+  internal Account GetById(string id)
+  {
+    var account = _repo.GetById(id);
+    if (account == null)
+    {
+      throw new Exception("That account Id Does Not Exist");
+    }
+    return account;
+  }
+
+
+
+  internal Account EditAccount(Account account, Account user)
+  {
+    var original = GetById(user.Id);
+
+    original.Name = account.Name;
+    original.Picture = account.Picture;
+    original.coverImg = account.coverImg;
+
+    var updated = _repo.EditAccount(original);
+    return updated;
   }
 }

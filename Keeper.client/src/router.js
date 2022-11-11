@@ -22,13 +22,18 @@ const routes = [
     component: loadPage('AccountPage'),
     beforeEnter: authGuard
   },
-
   {
-    path: '/profile/:id',
+    path: '/profiles/:id',
     name: 'Profile',
     component: loadPage('ProfilePage')
   }
 ]
+
+
+
+
+
+
 
 export const router = createRouter({
   linkActiveClass: 'router-link-active',

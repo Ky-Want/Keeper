@@ -1,5 +1,4 @@
 <template>
-  <!-- FIXME: all users should have a public profile page -->
   <!-- Cover Image -->
   <div class="container mt-5">
     <div class="d-flex justify-content-center">
@@ -78,7 +77,7 @@ export default {
 
     async function getUserById() {
       try {
-        await profileService.getUserById(route.params.creatorId)
+        await profileService.getUserById(route.params.id)
       } catch (error) {
         Pop.error(error, 'getting user: profile page')
       }
@@ -88,7 +87,7 @@ export default {
 
     async function getUserKeeps() {
       try {
-        await profileService.getUserKeeps(route.params.creatorId)
+        await profileService.getUserKeeps(route.params.id)
       } catch (error) {
         Pop.error(error, 'getting user keeps: profile page')
       }
@@ -98,7 +97,7 @@ export default {
 
     async function getUserVaults() {
       try {
-        await profileService.getUserVaults(route.params.creatorId)
+        await profileService.getUserVaults(route.params.id)
       } catch (error) {
         Pop.error(error, 'getting user vaults: profile page')
       }

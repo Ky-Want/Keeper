@@ -4,19 +4,15 @@
     <button class="dropdown-toggle text-primary selectable col-5" type="button" data-bs-toggle="dropdown"
       aria-expanded="false"></button>
     <ul class="dropdown-menu">
-      <li class="dropdown-item selectable" @click="createVaultKeep()">
+
+
+      <!-- FIXME: add keep to a vault -->
+      <!-- @click="createVaultKeep()" -->
+      <li class="dropdown-item selectable" @click="handleSubmit()">
         {{ vault?.name }}
       </li>
     </ul>
   </div>
-
-
-
-
-  <!-- FIXME: add keep to a vault -->
-  <!-- <div class="col-5" v-if="profile.id != account.id">
-    <button type="button" class="btns btn btn-primary d-flex align-items-center" @click="handleSubmit()">Save</button>
-  </div> -->
 </template>
 
 

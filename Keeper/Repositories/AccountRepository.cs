@@ -53,6 +53,9 @@ public class AccountRepository
     return _db.QueryFirstOrDefault<Account>(sql, new { userEmail });
   }
 
+
+
+
   internal Account GetById(string id)
   {
     string sql = "SELECT * FROM accounts WHERE id = @id";
@@ -82,7 +85,7 @@ public class AccountRepository
 
 
 
-  internal Account Edit(Account update)
+  internal Account EditAccount(Account update)
   {
     string sql = @"
             UPDATE accounts

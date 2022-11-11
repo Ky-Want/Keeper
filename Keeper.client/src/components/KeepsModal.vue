@@ -3,7 +3,7 @@
   <div class="modal fade" id="KeepModal" data-bs-backdrop="static" data-bs-keyboard="false"
     aria-labelledby="KeepModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
-      <div class="modal-content">
+      <div class="modal-content" v-if="keep.id">
 
         <!-- picture of the keep -->
         <div class="modal-body row">
@@ -20,14 +20,13 @@
 
 
 
-              <!-- FIXME -->
-              <router-link :to="{ name: 'Profile', params: { id: profile.id } }">
-                <div>
-                  <img :src="keep.creator?.picture" data-bs-dismiss="modal" alt="Keep Creator Pic"
-                    :title="keep.creator?.name" class="creator-pic rounded-circle selectable">
-                </div>
-              </router-link>
+              <div>
+                <router-link :to="{ name: 'Profile', params: { id: keep.creatorId } }">
 
+                  <img :src="keep?.creator?.picture" data-bs-dismiss="modal" alt="Keep Creator Pic"
+                    :title="keep?.creator?.name" class="creator-pic rounded-circle selectable">
+                </router-link>
+              </div>
 
 
 
@@ -56,13 +55,17 @@
               <p class="d-flex justify-content-center">{{ keep?.description }}</p>
             </div>
 
+
+            <!-- create vault keep component -->
             <CreateVaultKeep />
             <!-- #endregion -->
           </div>
         </div>
       </div>
+      <div v-else>Loading...</div>
     </div>
   </div>
+
 </template>
 
 
@@ -72,11 +75,11 @@
 
 
 <script>
+import { Keep } from "../models/Keep.js";
+import CreateVaultKeep from "./Forms/CreateVaultKeep.vue";
+
 import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState.js";
-import { logger } from "../utils/Logger.js";
-import Pop from "../utils/Pop.js";
-import CreateVaultKeep from "./Forms/CreateVaultKeep.vue";
 
 
 export default {
@@ -86,7 +89,9 @@ export default {
   //     required: true
   //   }
   // },
-  setup(props) {
+
+  setup() {
+
     return {
       account: computed(() => AppState.account),
       keep: computed(() => AppState.activeKeep),
