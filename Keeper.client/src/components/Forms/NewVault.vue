@@ -7,16 +7,16 @@
 
 
         <!-- title -->
-        <div class="modal-body">
+        <form @submit.prevent="createVault()" class="modal-body">
           <div class="form-floating mb-3">
-            <input type="name" class="form-control" id="name" placeholder="title">
+            <input v-model="editable.name" type="text" class="form-control" id="name" placeholder="title" required>
             <label for="floatingInput">Title</label>
           </div>
 
 
           <!-- imgUrl -->
           <div class="form-floating mb-3">
-            <input type="url" class="form-control" id="imgUrl" placeholder="Input">
+            <input v-model="editable.img" type="url" class="form-control" id="imgUrl" placeholder="Input" required>
             <label for="floatingInput">Img Url</label>
           </div>
 
@@ -26,7 +26,7 @@
             <div>
               <div class="font-1">private vaults can only be seen by you.</div>
               <div class="mb-3 form-check d-flex justify-content-end d-flex gap-2">
-                <input type="checkbox" class="form-check-input" id="privateCheck">
+                <input v-model="editable.isPrivate" type="checkbox" class="form-check-input" id="privateVaultCheck">
                 <label class="form-check-label" for="privateCheck"> Make Vault Private?</label>
               </div>
             </div>
@@ -37,7 +37,8 @@
               <button type="submit" class="btn btn-primary mt-4 mx-3 mb-2">CREATE VAULT</button>
             </div>
           </div>
-        </div>
+        </form>
+
       </div>
     </div>
   </div>
@@ -50,13 +51,36 @@
 
 
 <script>
+import { ref } from "vue";
+import { AppState } from "../../AppState.js";
+import { vaultsService } from "../../services/VaultsService.js";
+import { logger } from "../../utils/Logger.js";
+import Pop from "../../utils/Pop.js";
+
 export default {
 
   setup() {
+    const editable = ref({});
 
     return {
+      editable,
 
+      async createVault() {
+        try {
+          if (!AppState.account.id) {
+            throw new Error('You must be signed in to create a vault')
+          }
+          await vaultsService.createVault(editable.value);
+          editable.value = {};
+
+          Pop.success("Successfully created vault")
+        } catch (error) {
+          logger.error(error)
+          Pop.error("Create Vault Failed: new vault")
+        }
+      }
     }
+
   }
 }
 </script>

@@ -1,10 +1,6 @@
 <template>
-
-
-
-
   <!-- create forms -->
-  <div class="d-flex justify-content-end m-3 mt-4">
+  <div class="d-flex justify-content-end m-3 mt-4" v-if="profile.id != account.id">
     <ul class="navbar-nav me-auto">
       <li>
         <div class="dropdown text-primary selectable">
@@ -27,6 +23,8 @@
     </ul>
   </div>
 
+  <div v-else></div>
+
 
 
 
@@ -38,7 +36,10 @@
 
   <NewVault />
   <NewKeep />
-  <KeepsModal />
+
+  <div @click="viewed()">
+    <KeepsModal />
+  </div>
 
 </template>
 
@@ -49,9 +50,10 @@
 
 
 <script>
-import Keeps from "../components/KeepsCard.vue";
 import { keepsService } from "../services/KeepsService.js";
+import Keeps from "../components/KeepsCard.vue";
 import KeepsCard from "../components/KeepsCard.vue";
+import KeepsModal from "../components/KeepsModal.vue";
 
 import { computed } from "@vue/reactivity";
 import { onMounted } from "vue";
@@ -60,7 +62,6 @@ import { AppState } from "../AppState.js";
 import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
 
-import KeepsModal from "../components/KeepsModal.vue";
 import NewKeep from "../components/Forms/NewKeep.vue";
 import NewVault from "../components/Forms/NewVault.vue";
 
@@ -77,13 +78,16 @@ export default {
       }
     }
 
+
     onMounted(() => {
       getKeeps();
     })
 
     return {
       account: computed(() => AppState.account),
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
+      profile: computed(() => AppState.profile),
+      vaults: computed(() => AppState.vaults),
     };
   },
 

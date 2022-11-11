@@ -2,7 +2,7 @@
   <!-- Cover Image -->
   <div class="container mt-5">
     <div class="d-flex justify-content-center">
-      <img :src="account?.coverImg" alt="cover image" class="coverImg under">
+      <img src="//thiscatdoesnotexist.com" alt="cover image" class="coverImg under">
 
       <!-- user picture -->
       <img :src="account?.picture" alt="user image" class="rounded-circle over userImg">
@@ -16,7 +16,7 @@
 
     <!-- number of owned keeps and vaults -->
     <div class="d-flex gap-4 justify-content-center mb-5 pb-3">
-      <p>5 vaults</p> | <p>10 keeps</p>
+      <p>{{ vaults?.length }} vaults</p> | <p>{{ keeps.length }} keeps</p>
     </div>
 
 
@@ -79,7 +79,9 @@ export default {
       getAccount();
     });
     return {
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      vaults: computed(() => AppState.vaults),
+      keeps: computed(() => AppState.keeps)
     };
   },
   components: { VaultCard, KeepsCard, Forms }

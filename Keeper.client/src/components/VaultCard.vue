@@ -1,21 +1,13 @@
 <template>
-  <!-- owned vaults -->
-  <h2 class="px-5 pb-5 mb-3"><strong>Vaults</strong></h2>
-
-  <!-- vault cards -->
-  <div class="d-flex pb-5">
-    <div class="card">
-      <h3 class="title">Vault Name</h3>
-      <div class="bar">
-        <div class="emptybar"></div>
-        <div class="filledbar"></div>
-      </div>
-      <div class="pt-5 mt-4">
-        <router-link :to="{ name: 'Vault' }">
-          <img
-            src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdnb.artstation.com%2Fp%2Fmarketplace%2Fpresentation_assets%2F000%2F565%2F291%2Flarge%2Ffile.jpg%3F1603712584&f=1&nofb=1&ipt=a75c40805bf77b5562ebfd6c4bf9cbf5cafd4d1ea787adfa9e1e971e03b9f2ed&ipo=images"
-            alt="" class="rounded vaultImg selectable">
-        </router-link>
+  <div class="card">
+    <h3 class="title">{{ vault?.name }}</h3>
+    <div class="bar">
+      <div class="emptybar"></div>
+      <div class="filledbar"></div>
+    </div>
+    <div class="pt-5 mt-4">
+      <div @click="vaultPage()">
+        <img :src="vault?.img" alt="vault image" class="rounded vaultImg selectable">
       </div>
     </div>
   </div>
@@ -28,13 +20,32 @@
 
 
 <script>
+import { AppState } from "../AppState.js";
+import { router } from "../router.js";
+import { logger } from "../utils/Logger.js";
+
 export default {
+  props: {
+    vault: {
+      type: Object,
+      required: true
+    }
+  },
 
   setup() {
 
     return {
-
-    }
+      async vaultPage() {
+        try {
+          if (props.vault.isPrivate == true && AppState.account.id != props.vault.creatorId) {
+            router.push({ name: 'Home' })
+          }
+          router.push({ name: 'Vault', params: { vaultId: props.vault.id } })
+        } catch (error) {
+          logger.error(error)
+        }
+      }
+    };
   }
 }
 </script>

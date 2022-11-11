@@ -8,15 +8,23 @@ class VaultKeepsService {
   async getVaultKeeps(vaultId) {
     const res = await api.get('api/vaultKeeps/' + vaultId + '/keeps')
     logger.log(res.data)
-    AppState.vaultKeep = res.data
+    AppState.vaultKeeps = res.data
   }
 
 
   async getMyVaultKeeps() {
     const res = await api.get('account/')
     logger.log('[Get My Vault Keeps]', res.data)
-    AppState.activeVaultKeep = res.data
+    AppState.activeVaultKeeps = res.data
   }
+
+
+  async getKeepsByVaultId(id) {
+    const res = await api.get(`api/vaults/${id}/keeps`)
+    logger.log('getting vaultKeeps: Service', res.data)
+    AppState.activeVaultKeeps = res.data
+  }
+
 
 
 
@@ -27,7 +35,7 @@ class VaultKeepsService {
     const res = await api.post('api/vaultKeeps/' + vaultId + '/keeps', data)
     logger.log(res.data)
     AppState.vaultKeeps.push(res.data)
-    AppState.vaultKeeps.kept++
+    AppState.keeps.kept++
   }
 }
 

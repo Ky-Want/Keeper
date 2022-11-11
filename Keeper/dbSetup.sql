@@ -26,7 +26,7 @@ CREATE TABLE
         updatedAt DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'Last Update',
         -- 
         name VARCHAR(255) NOT NULL,
-        img VARCHAR(500) NOT NULL,
+        img VARCHAR(10000) NOT NULL,
         description TEXT NOT NULL,
         isPrivate TINYINT DEFAULT 0 NOT NULL,
         -- 

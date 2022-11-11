@@ -33,12 +33,15 @@
             <!-- how many people have view and saved this keep -->
             <div class="row mt-3 mb-5 pb-2">
               <div class="d-flex gap-5 justify-content-center">
-                <i class="fa-solid fa-eye"> - {{ keep?.views }}</i> <i class="fa-solid fa-k"> - {{ keep?.kept }}</i>
+                <!-- FIXME: increment views and keeps -->
+                <i class="fa-solid fa-eye"> - {{ keep?.views }}</i> <i class="fa-solid fa-k"> - {{ keep?.kept
+                }}</i>
               </div>
             </div>
 
 
 
+            <!-- #region -->
             <!-- The title and description of this keep -->
             <div class="row mb-3">
               <h2 class="d-flex justify-content-center">{{ keep?.name }}</h2>
@@ -49,28 +52,28 @@
 
             <!-- Save keep to specified vault -->
             <div class="row d-flex justify-content-between">
-              <div class="dropdown text-primary selectable col-5">
+              <div class="dropdown text-primary selectable col-5" v-if="profile.id != account.id">
                 <a class="btn btn-secondary dropdown-toggle" href="#chooseVault" role="button" data-bs-toggle="dropdown"
                   aria-expanded="false">
                   Vault
                 </a>
                 <ul class="dropdown-menu">
                   <li>
-                    <a class="dropdown-item text-green" href="#chooseVault">
-                      vault name
+                    <a class="dropdown-item text-green" href="#chooseVault" v-for="v in vault" :key="v.id">
+                      {{ vault?.name }}
                     </a>
                   </li>
                 </ul>
               </div>
 
-              <div class="col-5">
-                <button type="button" class="btns btn btn-primary d-flex align-items-center">Save</button>
-              </div>
-            </div>
 
+
+
+              <CreateVaultKeep />
+            </div>
+            <!-- #endregion -->
           </div>
         </div>
-
       </div>
     </div>
   </div>
@@ -85,6 +88,7 @@
 <script>
 import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState.js";
+import CreateVaultKeep from "./Forms/CreateVaultKeep.vue";
 
 
 export default {
@@ -95,12 +99,14 @@ export default {
   //   }
   // },
   setup(props) {
-
     return {
       account: computed(() => AppState.account),
-      keep: computed(() => AppState.activeKeep)
+      keep: computed(() => AppState.activeKeep),
+      vault: computed(() => AppState.vaults),
+      profile: computed(() => AppState.profile)
     };
   },
+  components: { CreateVaultKeep }
 }
 </script>
 

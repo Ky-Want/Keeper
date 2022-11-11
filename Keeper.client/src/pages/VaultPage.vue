@@ -1,13 +1,11 @@
 <template>
   <div class="container">
     <div class="mt-5 d-flex justify-content-center">
-      <img
-        src="https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Flatestwall.com%2Fimages%2Fwallpaper%2Fsunset_hd_wallpaper_21.jpg&f=1&nofb=1&ipt=538ad29db1aec59b2dbaaed2d8619426b1f0a74ba85fedec5822a576d96acc8b&ipo=images"
-        alt="" class="img-size">
+      <img :src="vault.img" alt="" class="img-size">
     </div>
 
     <div class="d-flex justify-content-center mt-5">
-      <strong>13 keeps</strong>
+      <strong>{{ vaultKeeps.length }}</strong>
     </div>
 
     <div class="grid-container">
@@ -33,7 +31,10 @@ export default {
   setup() {
     return {
       account: computed(() => AppState.account),
-      keeps: computed(() => AppState.keeps)
+      keeps: computed(() => AppState.keeps),
+      vaultKeeps: computed(() => AppState.vaultKeeps),
+      profile: computed(() => AppState.profile),
+      vault: computed(() => AppState.vaults)
     };
   },
   components: { KeepsCard }

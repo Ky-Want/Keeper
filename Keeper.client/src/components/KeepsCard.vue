@@ -5,15 +5,13 @@
     <div data-bs-toggle="modal" data-bs-target="#KeepModal" @click="setActiveKeep">
       <img class='grid-item selectable img-grey' :src="keep?.img" alt='Keep image' :title="keep?.name">
     </div>
-
-
     <!-- Keep name -->
     <div class="d-flex justify-content-between">
       <p>{{ keep?.name }}</p>
 
 
       <!-- Profile picture of keep creator -->
-      <router-link :to="{ name: 'Profile' }">
+      <router-link :to="{ name: 'Profile', params: { id: keep.id } }">
         <p><img :src="keep?.creator?.picture" alt="profile pic" :title="keep?.creator?.name"
             class="img-fluid profile-pic selectable rounded-circle">
         </p>

@@ -6,7 +6,6 @@ import { api } from "./AxiosService.js"
 
 
 class VaultsService {
-  // user should be pushed back to the home page when trying to open a vault they don't have access to
   async getVaults() {
     const res = await api.get('api/vaults')
     logger.log('[Get Vaults]', res.data)
@@ -17,8 +16,15 @@ class VaultsService {
   async getVaultById(id) {
     const res = await api.get('api/vaults/' + id)
     logger.log(res.data)
-    AppState.vault = new Vault(res.data)
+    AppState.vaults = new Vault(res.data)
     return res.data
+  }
+
+
+  async getVaultsByAccount() {
+    const res = await api.get('account/vaults')
+    logger.log('getting vault by account: service', res.data)
+    AppState.accountVaults = res.data
   }
 
 
@@ -27,8 +33,8 @@ class VaultsService {
 
 
   // logged in user can create and delete vaults
-  async createVault(data) {
-    const res = await api.post('api/vaults', data)
+  async createVault(newVault) {
+    const res = await api.post('api/vaults', newVault)
     logger.log(res.data)
     AppState.vaults.push(new Vault(res.data))
   }

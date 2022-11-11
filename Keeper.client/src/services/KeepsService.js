@@ -6,15 +6,18 @@ import { api } from "./AxiosService.js";
 
 
 class KeepsService {
-  // visitors can see all keeps
-  // when keep is viewed views ++
   async getKeeps() {
     const res = await api.get('api/keeps')
     logger.log('getting keeps: Service', res.data)
     AppState.keeps = res.data.map(k => new Keep(k))
-    // AppState.keeps = res.data
   }
 
+
+  async getKeepById(id) {
+    const res = await api.get(`api/keeps/${id}`)
+    logger.log('getting a keep: service', res.data)
+    AppState.activeKeep = res.data
+  }
 
 
 
