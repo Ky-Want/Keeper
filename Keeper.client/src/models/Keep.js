@@ -3,6 +3,7 @@ export class Keep {
     this.id = data.id
     this.vaultId = data.vaultId
     this.creatorId = data.creatorId
+    this.vaultKeepId = data.vaultKeepId
 
     this.creator = data.creator
 

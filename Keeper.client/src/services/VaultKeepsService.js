@@ -1,4 +1,5 @@
 import { AppState } from "../AppState.js"
+import { Keep } from "../models/Keep.js"
 import { logger } from "../utils/Logger.js"
 import { api } from "./AxiosService.js"
 
@@ -22,7 +23,7 @@ class VaultKeepsService {
   async getKeepsByVaultId(id) {
     const res = await api.get(`api/vaults/${id}/keeps`)
     logger.log('getting vaultKeeps: Service', res.data)
-    AppState.activeVaultKeeps = res.data
+    AppState.vaultKeeps = res.data.map(vk => new Keep(vk))
   }
 
 

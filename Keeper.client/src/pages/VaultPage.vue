@@ -9,12 +9,12 @@
       <strong>{{ vaultKeeps.length }}</strong>
     </div>
 
-    <!-- FIXME: show only the vault keeps for this vault -->
-    <!-- FIXME: allow users to remove a keep from their vault -->
+
     <div class="grid-container">
-      <div v-for="k in keeps" :key="k.id">
+      <div v-for="k in vaultKeeps" :key="k.id">
         <KeepsCard :keep="k" />
       </div>
+
     </div>
   </div>
 </template>
@@ -28,7 +28,7 @@
 <script>
 import { computed } from "@vue/reactivity";
 import { onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { AppState } from "../AppState.js";
 import KeepsCard from "../components/KeepsCard.vue";
 import { vaultkeepsService } from "../services/VaultKeepsService.js";
@@ -39,23 +39,35 @@ import Pop from "../utils/Pop.js";
 export default {
   setup() {
     const route = useRoute();
+    const router = useRouter();
 
-    async function getKeepsByVaultId() {
+    // get the vault by its id
+    async function getVaultById() {
       try {
-        await vaultkeepsService.getKeepsByVaultId(route.params.id);
+        await vaultsService.getVaultById(route.params.id);
       } catch (error) {
-        logger.error(error)
+        logger.error("Getting vault by id failed")
+        router.push({ name: 'Home' })
       }
     }
 
 
-    onMounted(() => {
-      getKeepsByVaultId();
-    });
 
+    async function getKeepsByVaultId() {
+      try {
+        await vaultkeepsService.getKeepsByVaultId(route.params.id);
+      }
+      catch (error) {
+        logger.error(error);
+      }
+    }
+    onMounted(() => {
+      getKeepsByVaultId()
+      getVaultById()
+    });
     return {
       account: computed(() => AppState.account),
-      keeps: computed(() => AppState.keeps),
+      // keeps: computed(() => AppState.keeps),
       vaultKeeps: computed(() => AppState.vaultKeeps),
       profile: computed(() => AppState.profile),
       vault: computed(() => AppState.vaults),
@@ -64,35 +76,31 @@ export default {
 
       async deleteVault() {
         try {
-          if (AppState.account.id != AppState.activeVault.creatorId) {
-            throw new Error('You are not authorized to delete this vault')
-          }
-          const yes = await Pop.confirm('Are you sure you want to delete this vault?')
-          if (!yes) { return }
           await vaultsService.deleteVault(route.params.id);
-          Pop.success('Vault successfully deleted')
-        } catch (error) {
-          logger.error(error)
-          Pop.error("Delete vault failed: vault page")
+          Pop.success("Vault successfully deleted");
+        }
+        catch (error) {
+          logger.error(error);
+          Pop.error("Delete vault failed: vault page");
         }
       },
 
 
 
+
       async deleteVaultKeep() {
         try {
-          if (AppState.account.id != AppState.activeVault.creatorId) { throw new Error("You are not authorized to delete this vault keep.") }
-          const yes = await Pop.confirm("Are you sure you want to remove this vault keep?")
-          if (!yes) { return }
-          vaultkeepsService.deleteVaultKeep(route.params.id)
-          Pop.success('Vault Keep successfully removed')
-        } catch (error) {
-          logger.error(error)
-          Pop.error("Delete vault keep failed: vault page")
+          vaultkeepsService.deleteVaultKeep(route.params.id);
+          Pop.success("Vault Keep successfully removed");
+        }
+        catch (error) {
+          logger.error(error);
+          Pop.error("Delete vault keep failed: vault page");
         }
       }
-    }
-  }
+    };
+  },
+  components: { KeepsCard }
 }
 </script>
 

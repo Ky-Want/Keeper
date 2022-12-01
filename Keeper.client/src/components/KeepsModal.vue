@@ -22,7 +22,6 @@
 
               <div>
                 <router-link :to="{ name: 'Profile', params: { id: keep.creatorId } }">
-
                   <img :src="keep?.creator?.picture" data-bs-dismiss="modal" alt="Keep Creator Pic"
                     :title="keep?.creator?.name" class="creator-pic rounded-circle selectable">
                 </router-link>
@@ -40,7 +39,7 @@
             <div class="row mt-3 mb-5 pb-2">
               <div class="d-flex gap-5 justify-content-center">
 
-                <!-- FIXME: increment views and keeps -->
+
                 <i class="fa-solid fa-eye"> - {{ keep?.views }}</i> <i class="fa-solid fa-k"> - {{
                     keep?.kept
                 }}</i>
@@ -84,13 +83,6 @@ import { AppState } from "../AppState.js";
 
 
 export default {
-  // props: {
-  //   keep: {
-  //     type: Keep,
-  //     required: true
-  //   }
-  // },
-
   setup() {
 
     return {

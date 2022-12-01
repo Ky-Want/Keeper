@@ -38,7 +38,6 @@ export default {
         try {
           let vaultKeepData = { vaultId: vaultId, keepId: AppState.activeKeep.id }
           let newVaultKeep = await vaultkeepsService.createVaultKeep(vaultKeepData)
-          console.log('Sending newVaultKeep form:', newVaultKeep);
         } catch (error) {
           Pop.error(error, '[Submitting vaultKeep Form failed]')
           logger.error(error, 'submitting create vaultKeep form')

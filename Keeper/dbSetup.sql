@@ -77,5 +77,5 @@ CREATE TABLE
         keepId int NOT NULL,
         -- 
         FOREIGN KEY (creatorId) REFERENCES accounts(id),
-        FOREIGN KEY (vaultId) REFERENCES vaults(id)
+        FOREIGN KEY (vaultId) REFERENCES vaults(id) ON DELETE CASCADE
     ) default charset utf8 COMMENT '';

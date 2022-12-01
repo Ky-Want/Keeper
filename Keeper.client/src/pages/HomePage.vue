@@ -31,14 +31,16 @@
 
 
   <div class="grid-container">
-    <div v-for="k in keeps" :key="k.id">
+    <div v-for="k in keeps" :key="k.id" @click="viewed(k.id)">
       <KeepsCard :keep="k" />
     </div>
   </div>
 
+
+
   <NewVault />
   <NewKeep />
-  <KeepsModal />
+
 </template>
 
 
@@ -77,6 +79,7 @@ export default {
     }
 
 
+
     onMounted(() => {
       getKeeps();
     })
@@ -84,12 +87,23 @@ export default {
     return {
       account: computed(() => AppState.account),
       keeps: computed(() => AppState.keeps),
+      keep: computed(() => AppState.activeKeep),
       profile: computed(() => AppState.profile),
-      vaults: computed(() => AppState.vaults)
-    };
+      vaults: computed(() => AppState.vaults),
+
+
+
+      async viewed(id) {
+        try {
+          await keepsService.getKeepById(id)
+          // views = AppState.activeKeep.views()
+          logger.log(views)
+        } catch (error) {
+          logger.error("failed to add view")
+        }
+      }
+    }
   },
-
-
   components: { Keeps, NewKeep, NewVault, KeepsCard, KeepsModal }
 }
 </script>

@@ -14,6 +14,15 @@
       <p><img :src="keep?.creator?.picture" alt="profile pic" :title="keep?.creator?.name"
           class="img-fluid profile-pic selectable rounded-circle">
       </p>
+
+
+      <div v-if="keep.vaultKeepId" class="text-danger selectable" title="Remove Vault Keep" @click="deleteVaultKeep()">X
+      </div>
+      <!-- send in the vaultkeepId -->
+      <!-- v-if="profile.id != activeKeep.creatorId" -->
+      <div v-else class="text-danger selectable" title="Remove Keep" @click="deleteKeep()">X</div>
+
+
     </div>
   </div>
 
@@ -30,6 +39,10 @@ import { Keep } from "../models/Keep.js";
 
 import { computed } from "@vue/reactivity";
 import { AppState } from "../AppState.js";
+import Pop from "../utils/Pop.js";
+import { keepsService } from "../services/KeepsService.js";
+import { logger } from "../utils/Logger.js";
+import { vaultkeepsService } from "../services/VaultKeepsService.js";
 
 
 export default {
@@ -44,9 +57,27 @@ export default {
 
     return {
       account: computed(() => AppState.account),
+      activeKeep: computed(() => AppState.activeKeep),
 
       setActiveKeep() {
         AppState.activeKeep = props.keep
+      },
+
+      async deleteKeep() {
+        try {
+          await keepsService.deleteKeep(props.keep.id)
+        } catch (error) {
+          Pop.error(error.message)
+        }
+      },
+
+      async deleteVaultKeep() {
+        try {
+          // logger.log(props.keep)
+          await vaultkeepsService.deleteVaultKeep(props.keep.vaultKeepId)
+        } catch (error) {
+          Pop.error(error.message)
+        }
       }
     };
   },

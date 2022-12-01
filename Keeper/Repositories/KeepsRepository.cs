@@ -96,7 +96,8 @@ public class KeepsRepository : BaseRepository
     UPDATE keeps SET
       name = @Name,
       description = @Description,
-      kept = @Kept
+      kept = @Kept,
+      views = @Views
     WHERE id = @id
     ;";
 
