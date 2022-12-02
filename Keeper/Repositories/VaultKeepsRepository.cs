@@ -30,7 +30,7 @@ public class VaultKeepsRepository : BaseRepository
 
 
   // REVIEW: Parameter '@VaultId' must be defined. To use this as a variable, set 'Allow User Variables=true' in the connection string.
-  // ^  = missing inserts (id & creatorId)
+  // ^  = it was missing inserts (id & creatorId)
   internal VaultKeep CreateVaultKeep(VaultKeep newVaultKeep)
   {
     var sql = @"

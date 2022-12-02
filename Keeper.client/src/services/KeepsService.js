@@ -7,8 +7,12 @@ import { api } from "./AxiosService.js";
 
 class KeepsService {
   async getKeeps() {
-    const res = await api.get('api/keeps')
-    AppState.keeps = res.data.map(k => new Keep(k))
+    try {
+      const res = await api.get('api/keeps')
+      AppState.keeps = res.data.map(k => new Keep(k))
+    } catch (error) {
+      logger.error("Get keeps failed in keeps service")
+    }
   }
 
 

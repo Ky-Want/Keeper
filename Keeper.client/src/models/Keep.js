@@ -16,5 +16,4 @@ export class Keep {
     this.views = data.views
     this.kept = data.kept
   }
-
 }
